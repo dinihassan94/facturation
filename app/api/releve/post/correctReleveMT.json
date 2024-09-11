@@ -1,0 +1,146 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/index.ejs",
+      "linkedForm": "formUpdateReleveMt"
+    },
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ],
+    "$_POST": [
+      {
+        "type": "text",
+        "fieldName": "user_crea",
+        "name": "user_crea"
+      },
+      {
+        "type": "text",
+        "fieldName": "num_releve",
+        "name": "num_releve"
+      },
+      {
+        "type": "text",
+        "fieldName": "index_a",
+        "name": "index_a"
+      },
+      {
+        "type": "text",
+        "fieldName": "anomalie",
+        "name": "anomalie"
+      },
+      {
+        "type": "text",
+        "fieldName": "old_index",
+        "name": "old_index"
+      },
+      {
+        "type": "text",
+        "fieldName": "correctedReleve",
+        "name": "correctedReleve"
+      },
+      {
+        "type": "text",
+        "fieldName": "index_r",
+        "name": "index_r"
+      },
+      {
+        "type": "text",
+        "fieldName": "ipm",
+        "name": "ipm"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "maxLogId",
+        "module": "dbupdater",
+        "action": "custom",
+        "options": {
+          "connection": "edbdev",
+          "sql": {
+            "query": "select (MAX(id_log)+1) as max from log_releve_correction",
+            "params": []
+          }
+        },
+        "output": false,
+        "meta": [
+          {
+            "name": "max",
+            "type": "number"
+          }
+        ],
+        "type": "dbcustom_query"
+      },
+      {
+        "name": "updateReleve",
+        "module": "dbupdater",
+        "action": "custom",
+        "options": {
+          "connection": "edbdev",
+          "sql": {
+            "query": "update releve set index_a=:p1, anomalie='VC' where num_releve=:p2",
+            "params": [
+              {
+                "name": ":p1",
+                "value": "{{$_POST.index_a}}"
+              },
+              {
+                "name": ":p2",
+                "value": "{{$_POST.num_releve}}"
+              }
+            ]
+          }
+        },
+        "output": false,
+        "meta": [],
+        "outputType": "array",
+        "type": "dbcustom_query"
+      },
+      {
+        "name": "updateLog",
+        "module": "dbupdater",
+        "action": "custom",
+        "options": {
+          "connection": "edbdev",
+          "sql": {
+            "query": "insert into log_releve_correction (\"anomalie\", \"id_log\", \"index_ancien\", \"num_releve\", \"user_crea\") values (?, ?, ?, ?, ?) returning id_log",
+            "params": [
+              {
+                "name": "?",
+                "value": "{{$_POST.anomalie}}"
+              },
+              {
+                "name": "?",
+                "value": "{{maxLogId[0].max}}"
+              },
+              {
+                "name": "?",
+                "value": "{{$_POST.old_index}}"
+              },
+              {
+                "name": "?",
+                "value": "{{$_POST.num_releve}}"
+              },
+              {
+                "name": "?",
+                "value": "{{$_POST.user_crea}}"
+              }
+            ]
+          }
+        },
+        "output": false,
+        "meta": [],
+        "outputType": "array",
+        "type": "dbcustom_query"
+      }
+    ]
+  }
+}

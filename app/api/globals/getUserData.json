@@ -1,0 +1,135 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "matricule"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "query",
+      "module": "dbupdater",
+      "action": "custom",
+      "options": {
+        "connection": "edbdev",
+        "sql": {
+          "query": "select * from employe where matricule = :P1",
+          "params": [
+            {
+              "name": ":P1",
+              "value": "{{$_GET.matricule}}",
+              "test": "47698"
+            }
+          ]
+        }
+      },
+      "output": true,
+      "meta": [
+        {
+          "name": "matricule",
+          "type": "number"
+        },
+        {
+          "name": "nom",
+          "type": "text"
+        },
+        {
+          "name": "id_client",
+          "type": "number"
+        },
+        {
+          "name": "a_init",
+          "type": "text"
+        },
+        {
+          "name": "id_machine",
+          "type": "number"
+        },
+        {
+          "name": "poste_mobile",
+          "type": "text"
+        },
+        {
+          "name": "connecte",
+          "type": "text"
+        },
+        {
+          "name": "poste_encours",
+          "type": "number"
+        },
+        {
+          "name": "dern_conn",
+          "type": "datetime"
+        },
+        {
+          "name": "dern_deconn",
+          "type": "datetime"
+        },
+        {
+          "name": "mess",
+          "type": "text"
+        },
+        {
+          "name": "date_mess",
+          "type": "datetime"
+        },
+        {
+          "name": "mess_lu",
+          "type": "text"
+        },
+        {
+          "name": "inst_vers",
+          "type": "number"
+        },
+        {
+          "name": "inst_urgence",
+          "type": "text"
+        },
+        {
+          "name": "statut",
+          "type": "number"
+        },
+        {
+          "name": "droit_au_quota",
+          "type": "text"
+        },
+        {
+          "name": "equipe",
+          "type": "text"
+        },
+        {
+          "name": "app_version",
+          "type": "text"
+        },
+        {
+          "name": "date_visite",
+          "type": "datetime"
+        },
+        {
+          "name": "person_visite",
+          "type": "text"
+        },
+        {
+          "name": "user_tsptest",
+          "type": "text"
+        },
+        {
+          "name": "motpasse",
+          "type": "text"
+        },
+        {
+          "name": "password_salt",
+          "type": "text"
+        },
+        {
+          "name": "password_hash",
+          "type": "text"
+        }
+      ],
+      "outputType": "array",
+      "type": "dbcustom_query"
+    }
+  }
+}

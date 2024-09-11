@@ -1,0 +1,118 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      },
+      {
+        "type": "text",
+        "name": "id_contrat"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "client",
+      "module": "dbupdater",
+      "action": "custom",
+      "options": {
+        "connection": "TEST",
+        "sql": {
+          "query": "select * from view_client2 where id_contrat=:P1\n",
+          "params": [
+            {
+              "name": ":P1",
+              "value": "{{$_GET.id_contrat}}",
+              "test": "45716"
+            }
+          ]
+        }
+      },
+      "output": true,
+      "meta": [
+        {
+          "name": "id_client",
+          "type": "number"
+        },
+        {
+          "name": "nom",
+          "type": "text"
+        },
+        {
+          "name": "adresse",
+          "type": "text"
+        },
+        {
+          "name": "id_contrat",
+          "type": "number"
+        },
+        {
+          "name": "roletp",
+          "type": "text"
+        },
+        {
+          "name": "pletat",
+          "type": "text"
+        },
+        {
+          "name": "poscnt",
+          "type": "text"
+        },
+        {
+          "name": "id_pl",
+          "type": "number"
+        },
+        {
+          "name": "ps",
+          "type": "number"
+        },
+        {
+          "name": "codepl",
+          "type": "text"
+        },
+        {
+          "name": "solde",
+          "type": "text"
+        },
+        {
+          "name": "code_cpteur",
+          "type": "text"
+        },
+        {
+          "name": "date_construction",
+          "type": "text"
+        },
+        {
+          "name": "adr_physique",
+          "type": "text"
+        },
+        {
+          "name": "num_cpteur",
+          "type": "text"
+        },
+        {
+          "name": "matricule",
+          "type": "number"
+        },
+        {
+          "name": "person_visite",
+          "type": "text"
+        },
+        {
+          "name": "date_visite",
+          "type": "text"
+        },
+        {
+          "name": "agmobil",
+          "type": "text"
+        }
+      ],
+      "type": "dbcustom_query"
+    }
+  }
+}

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="fr" is="dmx-app">
+
+<head>
+  <base href="/">
+  <script src="/dmxAppConnect/dmxAppConnect.js"></script>
+  <meta charset="UTF-8">
+  <title><%=_('title')%></title>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="/bootstrap/5/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js" integrity="sha256-CutOzxCRucUsn6C6TcEYsauvvYilEniTXldPa6/wu0k=" crossorigin="anonymous"></script>
+  <script src="/dmxAppConnect/dmxRouting/dmxRouting.js" defer></script>
+  <script src="/dmxAppConnect/dmxBootstrap5Navigation/dmxBootstrap5Navigation.js" defer></script>
+  <script src="/dmxAppConnect/dmxStateManagement/dmxStateManagement.js" defer></script>
+  <script src="/dmxAppConnect/dmxBrowser/dmxBrowser.js" defer></script>
+  <script src="/dmxAppConnect/dmxDataTraversal/dmxDataTraversal.js" defer></script>
+  <link rel="stylesheet" href="/dmxAppConnect/dmxNotifications/dmxNotifications.css" />
+  <script src="/dmxAppConnect/dmxNotifications/dmxNotifications.js" defer></script>
+  <script src="/dmxAppConnect/dmxScheduler/dmxScheduler.js" defer></script>
+  <script src="/dmxAppConnect/dmxBootstrap5Modal/dmxBootstrap5Modal.js" defer></script>
+  <link rel="stylesheet" href="/css/custom.css" />
+  <link rel="stylesheet" href="/dmxAppConnect/dmxBootstrap5TableGenerator/dmxBootstrap5TableGenerator.css" />
+  <script src="/dmxAppConnect/dmxBootstrap5PagingGenerator/dmxBootstrap5PagingGenerator.js" defer></script>
+  <script src="/dmxAppConnect/dmxMasonry/dmxMasonry.js" defer></script>
+  <script src="/dmxAppConnect/dmxFormatter/dmxFormatter.js" defer></script>
+  <script src="/dmxAppConnect/dmxFormRepeat/dmxFormRepeat.js" defer></script>
+  <link rel="stylesheet" href="/dmxAppConnect/dmxDatePicker/daterangepicker.min.css" />
+  <script src="/dmxAppConnect/dmxDatePicker/daterangepicker.min.js" defer></script>
+  <link rel="stylesheet" href="/dmxAppConnect/dmxDatePicker/dmxDatePicker.css" />
+  <script src="/dmxAppConnect/dmxDatePicker/dmxDatePicker.js" defer></script>
+
+
+  <link rel="stylesheet" href="/dmxAppConnect/dmxDatePicker/themes/blue.css" />
+  <link rel="stylesheet" href="/dmxAppConnect/dmxValidator/dmxValidator.css" />
+  <script src="/dmxAppConnect/dmxValidator/dmxValidator.js" defer></script>
+  <script src="/socket.io/socket.io.js" defer></script>
+  <script src="/dmxAppConnect/dmxSockets/dmxSockets.js" defer></script>
+  <link rel="stylesheet" href="/scss/style.scss" />
+  <link rel="stylesheet" href="/dmxAppConnect/dmxPreloader/dmxPreloader.css" />
+  <script src="/dmxAppConnect/dmxPreloader/dmxPreloader.js" defer></script>
+  <script src="/dmxAppConnect/dmxLazyLoad/dmxLazyLoad.js" defer></script>
+  <script src="/dmxAppConnect/dmxLazyLoad/lazysizes.min.js" defer></script>
+  <script src="/dmxAppConnect/dmxBootstrap5Theme/dmxBootstrap5Theme.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.2.9/build/pdfmake.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.2.9/build/vfs_fonts.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/html-to-pdfmake@2.5.2/browser.min.js" defer></script>
+  <script src="/dmxAppConnect/dmxPdfCreator/dmxPdfCreator.js" defer></script>
+  <link rel="stylesheet" href="/css/checbox.css" />
+  <link rel="stylesheet" href="/css/button.css" />
+  <link rel="stylesheet" href="/css/nav.css" />
+  <link rel="stylesheet" href="/dmxAppConnect/dmxAnimateCSS/animate.min.css" />
+  <script src="/dmxAppConnect/dmxAnimateCSS/dmxAnimateCSS.js" defer></script>
+  <script src="/dmxAppConnect/dmxCharts/Chart.min.js" defer></script>
+  <script src="/dmxAppConnect/dmxCharts/dmxCharts.js" defer></script>
+  <script src="/dmxAppConnect/dmxDatastore/dmxDatastore.js" defer></script>
+  <script src="/dmxAppConnect/dmxBootstrap5Offcanvas/dmxBootstrap5Offcanvas.js" defer></script>
+  <script src="/dmxAppConnect/dmxTyped/dmxTyped.js" defer></script>
+  <script src="/dmxAppConnect/dmxTyped/typed.min.js" defer></script>
+  <script src="/dmxAppConnect/dmxBootbox5/bootstrap-modbox.min.js" defer></script>
+  <script src="/dmxAppConnect/dmxBootbox5/dmxBootbox5.js" defer></script>
+  <script src="/dmxAppConnect/dmxBootstrap5Toasts/dmxBootstrap5Toasts.js" defer></script>
+  <link rel="stylesheet" href="/css/cutom2.css" />
+  <link rel="stylesheet" href="/css/modal.css" />
+  <link rel="stylesheet" href="/css/sidebar.css" />
+
+  <link rel="stylesheet" href="/dmxAppConnect/dmxSummernote/summernote-lite.min.css" />
+  <script src="/dmxAppConnect/dmxSummernote/summernote-lite.min.js" defer></script>
+  <script src="/dmxAppConnect/dmxSummernote/dmxSummernote.js" defer></script>
+  <link rel="stylesheet" href="/dmxAppConnect/dmxMediumEditor/dmxMediumEditor.css" />
+  <script src="/dmxAppConnect/dmxMediumEditor/dmxMediumEditor.js" defer></script>
+  <link rel="stylesheet" href="/dmxAppConnect/dmxMediumEditor/medium-editor.css" />
+  <script src="/dmxAppConnect/dmxMediumEditor/medium-editor.js" defer></script>
+  <link rel="stylesheet" href="/dmxAppConnect/dmxMediumEditor/themes/default.css" />
+</head>
+
+<body id="main">
+  <div class="wappler-block pt-2 container-fluid " dmx-style:min-height="'100vh'">
+
+
+    <div class="row  mb-5 pt-4">
+      <div class="col-2">
+        <%- await include('/partials/sidebar', Object.assign({}, locals)) %>
+      </div>
+      <div class="col main-body">
+        <div class="d-flex flex-column position-relative">
+          <div is="dmx-view" id="content">
+            <%- await include(content, locals); %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="row">
+      <%- await include('/partials/footer', Object.assign({}, locals)) %>
+    </div>
+  </div>
+
+  <script src="/bootstrap/5/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

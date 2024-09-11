@@ -1,0 +1,13 @@
+<!-- Wappler include jquery_slim_33="cdn" fontawesome_4="cdn" is="dmx-app" id="footer" appconnect="local" bootstrap5="local" head-page="layouts/main" components="{dmxBootstrap5Navigation:{},dmxStateManagement:{},dmxBrowser:{}}" -->
+<div is="dmx-browser" id="browser1"></div>
+<dmx-local-manager id="connectedUser"></dmx-local-manager>
+<div class="row ">
+    <div class="col-12 footer ps-0 pe-0">
+        <nav class="navbar navbar-footer navbar-expand-lg">
+            <i class="fa fa-user"></i>
+            <span class="navbar-text p-2 d-none d-sm-block d-md-block " dmx-text="connectedUser.data.nom">
+            </span>
+            <span class="navbar-text p-2 d-none d-sm-block d-md-block" dmx-text="connectedUser.data.matricule"></span>
+        </nav>
+    </div>
+</div>

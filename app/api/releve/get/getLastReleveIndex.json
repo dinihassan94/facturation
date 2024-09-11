@@ -1,0 +1,62 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "id_pl"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "query",
+      "module": "dbupdater",
+      "action": "custom",
+      "options": {
+        "connection": "EDBDEV",
+        "sql": {
+          "query": "SELECT   * FROM  VIEW_PRE_RELEVE_2 VRV WHERE  ID_PL = :P1 ORDER BY   DATE_PF DESC ,  DATE_RELEVE DESC, FIN_PERIODE ",
+          "params": [
+            {
+              "name": ":P1",
+              "value": "{{$_GET.id_pl}}",
+              "test": "57048"
+            }
+          ]
+        }
+      },
+      "output": true,
+      "meta": [
+        {
+          "name": "num_releve",
+          "type": "number"
+        },
+        {
+          "name": "index_a",
+          "type": "number"
+        },
+        {
+          "name": "date_releve",
+          "type": "datetime"
+        },
+        {
+          "name": "nature_releve",
+          "type": "number"
+        },
+        {
+          "name": "date_pf",
+          "type": "datetime"
+        },
+        {
+          "name": "id_pl",
+          "type": "number"
+        },
+        {
+          "name": "fin_periode",
+          "type": "text"
+        }
+      ],
+      "type": "dbcustom_query"
+    }
+  }
+}

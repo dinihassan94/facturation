@@ -1,0 +1,37 @@
+<!-- Wappler include fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="sidebar" appConnect="local" components="{dmxBootstrap5Navigation:{},dmxBootstrap5Modal:{}}" -->
+
+<div class="container sidebar">
+    <div class="row">
+        <%- await include('/partials/fili', Object.assign({}, locals)) %>
+
+        <div class="col-12">
+            <nav class="navbar side navbar-expand-lg  justify-content-between">
+
+
+                <a class="navbar-brand" href="#">
+                    <img src="/assets/images/edd.png" width="100"></a>
+                <a class="navbar-brand  mb-5" href="#">
+                    <h3 class="text-justify header fw-bolder lh-base">Facturation</h3>
+                </a>
+                <div class="navbar-nav nav-side">
+                    <a class="nav-item nav-link d-flex justify-content-between" href="/">
+                        <h5>Hors tournée</h5>
+
+                        <i class="fas fa-long-arrow-alt-right a-flip-left"></i>
+
+                    </a>
+                    <a class="nav-item nav-link d-flex justify-content-between" href="/manuelle">
+                        <h5>Manuelle</h5>
+
+                        <i class="fas fa-long-arrow-alt-right a-flip-left"></i>
+                    </a>
+                </div>
+
+            </nav>
+        </div>
+
+    </div>
+
+
+
+</div>

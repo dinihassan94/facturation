@@ -1,0 +1,64 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "query",
+      "module": "dbupdater",
+      "action": "custom",
+      "options": {
+        "connection": "TEST",
+        "sql": {
+          "query": "select  *  from  (SELECT  distinct -1  AS ID, PRIX_KW , 0 as FIXE1,  0 as FIXE2, 0 as VARIABLE1,  0 as VARIABLE2,  ' '  as LIBELLE, 0 as ID_TYPE_MVT    FROM         LIGNE_TARIF LT, CORR_MVT_LT WHERE     LT.TYPE_LIGNE = CORR_MVT_LT.ID_LIGNE   UNION  SELECT     LT.ID_LIGNE_TARIF AS ID, LT.PRIX_KW, LT.FIXE1, LT.FIXE2, LT.VARIABLE1, LT.VARIABLE2, LT.LIBELLE, CORR_MVT_LT.ID_TYPE_MVT FROM         LIGNE_TARIF LT, CORR_MVT_LT WHERE     LT.TYPE_LIGNE = CORR_MVT_LT.ID_LIGNE ) LT  WHERE     (ID <> 7) order by  LIBELLE",
+          "params": []
+        }
+      },
+      "output": true,
+      "meta": [
+        {
+          "name": "id",
+          "type": "number"
+        },
+        {
+          "name": "prix_kw",
+          "type": "number"
+        },
+        {
+          "name": "fixe1",
+          "type": "number"
+        },
+        {
+          "name": "fixe2",
+          "type": "number"
+        },
+        {
+          "name": "variable1",
+          "type": "number"
+        },
+        {
+          "name": "variable2",
+          "type": "number"
+        },
+        {
+          "name": "libelle",
+          "type": "text"
+        },
+        {
+          "name": "id_type_mvt",
+          "type": "number"
+        }
+      ],
+      "type": "dbcustom_query"
+    }
+  }
+}

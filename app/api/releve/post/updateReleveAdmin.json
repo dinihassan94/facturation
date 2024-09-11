@@ -1,0 +1,507 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/views/releve_admin.ejs",
+      "linkedForm": "updateForm"
+    },
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ],
+    "$_POST": [
+      {
+        "type": "number",
+        "fieldName": "index_a",
+        "name": "index_a"
+      },
+      {
+        "type": "number",
+        "fieldName": "utilisateur_der_maj",
+        "name": "utilisateur_der_maj"
+      },
+      {
+        "type": "number",
+        "fieldName": "num_releve",
+        "name": "num_releve"
+      },
+      {
+        "type": "text",
+        "fieldName": "date_releve",
+        "name": "date_releve"
+      },
+      {
+        "type": "text",
+        "fieldName": "date_pf",
+        "name": "date_pf"
+      },
+      {
+        "type": "text",
+        "name": "ancienne_valeur"
+      },
+      {
+        "type": "number",
+        "name": "num_client"
+      },
+      {
+        "type": "number",
+        "name": "num_contrat"
+      },
+      {
+        "type": "number",
+        "name": "type_trace"
+      },
+      {
+        "type": "number",
+        "name": "num_pl"
+      },
+      {
+        "type": "text",
+        "name": "nouvelle_valeur"
+      },
+      {
+        "type": "number",
+        "name": "num_cpteur"
+      },
+      {
+        "type": "number",
+        "name": "num_facture"
+      },
+      {
+        "type": "text",
+        "name": "date"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "update",
+        "module": "dbupdater",
+        "action": "update",
+        "options": {
+          "connection": "edbdev",
+          "sql": {
+            "type": "update",
+            "values": [
+              {
+                "table": "tsptest.releve",
+                "column": "index_a",
+                "type": "number",
+                "value": "{{$_POST.index_a}}"
+              },
+              {
+                "table": "tsptest.releve",
+                "column": "utilisateur_der_maj",
+                "type": "number",
+                "value": "{{$_POST.utilisateur_der_maj}}"
+              },
+              {
+                "table": "tsptest.releve",
+                "column": "date_releve",
+                "type": "datetime",
+                "value": "{{$_POST.date_releve}}"
+              },
+              {
+                "table": "tsptest.releve",
+                "column": "date_pf",
+                "type": "datetime",
+                "value": "{{$_POST.date_pf}}"
+              }
+            ],
+            "table": "tsptest.releve",
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "num_releve",
+                  "type": "double",
+                  "operator": "equal",
+                  "value": "{{$_POST.num_releve}}",
+                  "data": {
+                    "column": "num_releve"
+                  },
+                  "operation": "="
+                }
+              ]
+            },
+            "returning": "num_releve",
+            "query": "update \"tsptest\".\"releve\" set \"index_a\" = ?, \"utilisateur_der_maj\" = ?, \"date_releve\" = ?, \"date_pf\" = ? where \"num_releve\" = ? returning \"num_releve\"",
+            "params": [
+              {
+                "name": ":P1",
+                "type": "expression",
+                "value": "{{$_POST.index_a}}",
+                "test": ""
+              },
+              {
+                "name": ":P2",
+                "type": "expression",
+                "value": "{{$_POST.utilisateur_der_maj}}",
+                "test": ""
+              },
+              {
+                "name": ":P3",
+                "type": "expression",
+                "value": "{{$_POST.date_releve}}",
+                "test": ""
+              },
+              {
+                "name": ":P4",
+                "type": "expression",
+                "value": "{{$_POST.date_pf}}",
+                "test": ""
+              },
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P5",
+                "value": "{{$_POST.num_releve}}",
+                "test": ""
+              }
+            ]
+          }
+        },
+        "meta": [
+          {
+            "name": "affected",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "name": "query",
+        "module": "dbupdater",
+        "action": "custom",
+        "options": {
+          "connection": "edbdev",
+          "sql": {
+            "query": "select (MAX(id_trace)+1) as max from trace",
+            "params": []
+          }
+        },
+        "meta": [
+          {
+            "name": "max",
+            "type": "number"
+          }
+        ],
+        "type": "dbcustom_query"
+      },
+      {
+        "name": "",
+        "module": "core",
+        "action": "condition",
+        "options": {
+          "if": "{{$_POST.num_facture}}",
+          "then": {
+            "steps": {
+              "name": "insertTrace",
+              "module": "dbupdater",
+              "action": "insert",
+              "options": {
+                "connection": "edbdev",
+                "sql": {
+                  "type": "insert",
+                  "values": [
+                    {
+                      "table": "tsptest.trace",
+                      "column": "ancienne_valeur",
+                      "type": "text",
+                      "value": "{{$_POST.ancienne_valeur}}"
+                    },
+                    {
+                      "table": "tsptest.trace",
+                      "column": "num_client",
+                      "type": "number",
+                      "value": "{{$_POST.num_client}}"
+                    },
+                    {
+                      "table": "tsptest.trace",
+                      "column": "num_contrat",
+                      "type": "number",
+                      "value": "{{$_POST.num_contrat}}"
+                    },
+                    {
+                      "table": "tsptest.trace",
+                      "column": "type_trace",
+                      "type": "number",
+                      "value": "913"
+                    },
+                    {
+                      "table": "tsptest.trace",
+                      "column": "num_pl",
+                      "type": "number",
+                      "value": "{{$_POST.num_pl}}"
+                    },
+                    {
+                      "table": "tsptest.trace",
+                      "column": "nouvelle_valeur",
+                      "type": "text",
+                      "value": "{{$_POST.index_a}}"
+                    },
+                    {
+                      "table": "tsptest.trace",
+                      "column": "mat_employe",
+                      "type": "number",
+                      "value": "{{$_POST.utilisateur_der_maj}}"
+                    },
+                    {
+                      "table": "tsptest.trace",
+                      "column": "num_cpteur",
+                      "type": "number",
+                      "value": "{{$_POST.num_cpteur}}"
+                    },
+                    {
+                      "table": "tsptest.trace",
+                      "column": "num_facture",
+                      "type": "number",
+                      "value": "{{$_POST.num_facture}}"
+                    },
+                    {
+                      "table": "tsptest.trace",
+                      "column": "id_trace",
+                      "type": "number",
+                      "value": "{{query[0].max}}"
+                    },
+                    {
+                      "table": "tsptest.trace",
+                      "column": "date_trace",
+                      "type": "datetime",
+                      "value": "{{$_POST.date}}"
+                    }
+                  ],
+                  "table": "tsptest.trace",
+                  "returning": "id_trace",
+                  "query": "insert into \"tsptest\".\"trace\" (\"ancienne_valeur\", \"date_trace\", \"id_trace\", \"mat_employe\", \"nouvelle_valeur\", \"num_client\", \"num_contrat\", \"num_cpteur\", \"num_facture\", \"num_pl\", \"type_trace\") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) returning \"id_trace\"",
+                  "params": [
+                    {
+                      "name": ":P1",
+                      "type": "expression",
+                      "value": "{{$_POST.ancienne_valeur}}",
+                      "test": ""
+                    },
+                    {
+                      "name": ":P2",
+                      "type": "expression",
+                      "value": "{{$_POST.num_client}}",
+                      "test": ""
+                    },
+                    {
+                      "name": ":P3",
+                      "type": "expression",
+                      "value": "{{$_POST.num_contrat}}",
+                      "test": ""
+                    },
+                    {
+                      "name": ":P4",
+                      "type": "expression",
+                      "value": "{{$_POST.num_pl}}",
+                      "test": ""
+                    },
+                    {
+                      "name": ":P5",
+                      "type": "expression",
+                      "value": "{{$_POST.index_a}}",
+                      "test": ""
+                    },
+                    {
+                      "name": ":P6",
+                      "type": "expression",
+                      "value": "{{$_POST.utilisateur_der_maj}}",
+                      "test": ""
+                    },
+                    {
+                      "name": ":P7",
+                      "type": "expression",
+                      "value": "{{$_POST.num_cpteur}}",
+                      "test": ""
+                    },
+                    {
+                      "name": ":P8",
+                      "type": "expression",
+                      "value": "{{$_POST.num_facture}}",
+                      "test": ""
+                    },
+                    {
+                      "name": ":P9",
+                      "type": "expression",
+                      "value": "{{query[0].max}}",
+                      "test": ""
+                    },
+                    {
+                      "name": ":P10",
+                      "type": "expression",
+                      "value": "{{$_POST.date}}",
+                      "test": ""
+                    }
+                  ]
+                }
+              },
+              "meta": [
+                {
+                  "name": "identity",
+                  "type": "text"
+                },
+                {
+                  "name": "affected",
+                  "type": "number"
+                }
+              ]
+            }
+          },
+          "else": {
+            "steps": {
+              "name": "insertTrace_no_num_facture",
+              "module": "dbupdater",
+              "action": "insert",
+              "options": {
+                "connection": "edbdev",
+                "sql": {
+                  "type": "insert",
+                  "values": [
+                    {
+                      "table": "tsptest.trace",
+                      "column": "ancienne_valeur",
+                      "type": "text",
+                      "value": "{{$_POST.ancienne_valeur}}"
+                    },
+                    {
+                      "table": "tsptest.trace",
+                      "column": "num_client",
+                      "type": "number",
+                      "value": "{{$_POST.num_client}}"
+                    },
+                    {
+                      "table": "tsptest.trace",
+                      "column": "num_contrat",
+                      "type": "number",
+                      "value": "{{$_POST.num_contrat}}"
+                    },
+                    {
+                      "table": "tsptest.trace",
+                      "column": "type_trace",
+                      "type": "number",
+                      "value": "913"
+                    },
+                    {
+                      "table": "tsptest.trace",
+                      "column": "num_pl",
+                      "type": "number",
+                      "value": "{{$_POST.num_pl}}"
+                    },
+                    {
+                      "table": "tsptest.trace",
+                      "column": "nouvelle_valeur",
+                      "type": "text",
+                      "value": "{{$_POST.index_a}}"
+                    },
+                    {
+                      "table": "tsptest.trace",
+                      "column": "mat_employe",
+                      "type": "number",
+                      "value": "{{$_POST.utilisateur_der_maj}}"
+                    },
+                    {
+                      "table": "tsptest.trace",
+                      "column": "num_cpteur",
+                      "type": "number",
+                      "value": "{{$_POST.num_cpteur}}"
+                    },
+                    {
+                      "table": "tsptest.trace",
+                      "column": "id_trace",
+                      "type": "number",
+                      "value": "{{query[0].max}}"
+                    },
+                    {
+                      "table": "tsptest.trace",
+                      "column": "date_trace",
+                      "type": "datetime",
+                      "value": "{{$_POST.date}}"
+                    }
+                  ],
+                  "table": "tsptest.trace",
+                  "returning": "id_trace",
+                  "query": "insert into \"tsptest\".\"trace\" (\"ancienne_valeur\", \"date_trace\", \"id_trace\", \"mat_employe\", \"nouvelle_valeur\", \"num_client\", \"num_contrat\", \"num_cpteur\", \"num_pl\", \"type_trace\") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) returning \"id_trace\"",
+                  "params": [
+                    {
+                      "name": ":P1",
+                      "type": "expression",
+                      "value": "{{$_POST.ancienne_valeur}}",
+                      "test": ""
+                    },
+                    {
+                      "name": ":P2",
+                      "type": "expression",
+                      "value": "{{$_POST.num_client}}",
+                      "test": ""
+                    },
+                    {
+                      "name": ":P3",
+                      "type": "expression",
+                      "value": "{{$_POST.num_contrat}}",
+                      "test": ""
+                    },
+                    {
+                      "name": ":P4",
+                      "type": "expression",
+                      "value": "{{$_POST.num_pl}}",
+                      "test": ""
+                    },
+                    {
+                      "name": ":P5",
+                      "type": "expression",
+                      "value": "{{$_POST.index_a}}",
+                      "test": ""
+                    },
+                    {
+                      "name": ":P6",
+                      "type": "expression",
+                      "value": "{{$_POST.utilisateur_der_maj}}",
+                      "test": ""
+                    },
+                    {
+                      "name": ":P7",
+                      "type": "expression",
+                      "value": "{{$_POST.num_cpteur}}",
+                      "test": ""
+                    },
+                    {
+                      "name": ":P8",
+                      "type": "expression",
+                      "value": "{{query[0].max}}",
+                      "test": ""
+                    },
+                    {
+                      "name": ":P9",
+                      "type": "expression",
+                      "value": "{{$_POST.date}}",
+                      "test": ""
+                    }
+                  ]
+                }
+              },
+              "meta": [
+                {
+                  "name": "identity",
+                  "type": "text"
+                },
+                {
+                  "name": "affected",
+                  "type": "number"
+                }
+              ]
+            }
+          }
+        },
+        "outputType": "boolean"
+      }
+    ]
+  }
+}

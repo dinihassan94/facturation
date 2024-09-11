@@ -1,0 +1,100 @@
+{
+  "meta": {
+    "$_POST": [
+      {
+        "type": "text",
+        "name": "commentaire"
+      },
+      {
+        "type": "text",
+        "name": "user_maj"
+      },
+      {
+        "type": "text",
+        "name": "num_releve"
+      },
+      {
+        "type": "number",
+        "name": "num_ligne"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "update",
+      "module": "dbupdater",
+      "action": "update",
+      "options": {
+        "connection": "edbdev",
+        "sql": {
+          "type": "update",
+          "values": [
+            {
+              "table": "tsptest.tmp_releve_eddmobile",
+              "column": "user_maj",
+              "type": "number",
+              "value": "{{$_POST.user_maj}}"
+            },
+            {
+              "table": "tsptest.tmp_releve_eddmobile",
+              "column": "commentaire",
+              "type": "text",
+              "value": "{{$_POST.commentaire}}"
+            },
+            {
+              "table": "tsptest.tmp_releve_eddmobile",
+              "column": "statut",
+              "type": "number",
+              "value": "992"
+            }
+          ],
+          "table": "tsptest.tmp_releve_eddmobile",
+          "wheres": {
+            "condition": "AND",
+            "rules": [
+              {
+                "id": "num_ligne",
+                "type": "double",
+                "operator": "equal",
+                "value": "{{$_POST.num_ligne}}",
+                "data": {
+                  "column": "num_ligne"
+                },
+                "operation": "="
+              }
+            ]
+          },
+          "returning": "num_ligne",
+          "query": "update \"tsptest\".\"tmp_releve_eddmobile\" set \"user_maj\" = ?, \"commentaire\" = ?, \"statut\" = ? where \"num_ligne\" = ? returning \"num_ligne\"",
+          "params": [
+            {
+              "name": ":P1",
+              "type": "expression",
+              "value": "{{$_POST.user_maj}}",
+              "test": ""
+            },
+            {
+              "name": ":P2",
+              "type": "expression",
+              "value": "{{$_POST.commentaire}}",
+              "test": ""
+            },
+            {
+              "operator": "equal",
+              "type": "expression",
+              "name": ":P3",
+              "value": "{{$_POST.num_ligne}}",
+              "test": ""
+            }
+          ]
+        }
+      },
+      "meta": [
+        {
+          "name": "affected",
+          "type": "number"
+        }
+      ]
+    }
+  }
+}

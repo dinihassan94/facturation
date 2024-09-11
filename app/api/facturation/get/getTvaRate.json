@@ -1,0 +1,46 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      },
+      {
+        "type": "text",
+        "name": "id_contrat"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "tva",
+      "module": "dbupdater",
+      "action": "custom",
+      "options": {
+        "connection": "TEST",
+        "sql": {
+          "query": "SELECT LF.PRIX_KW   FROM         CONTRAT CNT, SOUS_CATEG_TARIF SC, LIGNE_TARIF LF, TABLES_VALEURS TV   WHERE     CNT.SOUS_CATEG = SC.NUM_SOUS_CAT_TAR AND SC.NUM_CATEG = LF.NUM_CATEG AND LF.TYPE_LIGNE = TV.ID_LIGNE AND   (CNT.ID_CONTRAT = :P1 ) AND (TV.CODE_LIGNE = 50) ",
+          "params": [
+            {
+              "name": ":P1",
+              "value": "{{$_GET.id_contrat}}",
+              "test": "225518"
+            }
+          ]
+        }
+      },
+      "output": true,
+      "meta": [
+        {
+          "name": "prix_kw",
+          "type": "number"
+        }
+      ],
+      "type": "dbcustom_query"
+    }
+  }
+}

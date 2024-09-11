@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "id_contrat"
+      },
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "query",
+      "module": "dbupdater",
+      "action": "custom",
+      "options": {
+        "connection": "TEST",
+        "sql": {
+          "query": "SELECT     CLIENT.NOM ,CLIENT.ID_CLIENT FROM ROLE, CLIENT WHERE     ROLE.NUM_CLIENT = CLIENT.ID_CLIENT AND (ROLE.TYPE_ROLE = 26) AND (ROLE.NUM_CONTRAT =:P1 )",
+          "params": [
+            {
+              "name": ":P1",
+              "value": "{{$_GET.id_contrat}}",
+              "test": "340987"
+            }
+          ]
+        }
+      },
+      "output": true,
+      "meta": [
+        {
+          "name": "nom",
+          "type": "text"
+        },
+        {
+          "name": "id_client",
+          "type": "number"
+        }
+      ],
+      "type": "dbcustom_query"
+    }
+  }
+}

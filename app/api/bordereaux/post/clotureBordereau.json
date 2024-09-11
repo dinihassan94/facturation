@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      },
+      {
+        "type": "text",
+        "name": "periode"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "cloturer",
+      "module": "dbupdater",
+      "action": "custom",
+      "options": {
+        "connection": "edbdev",
+        "sql": {
+          "query": "call sp_update_test_anomalie(?)",
+          "params": [
+            {
+              "name": ":P1",
+              "value": "{{$_GET.periode}}"
+            }
+          ]
+        }
+      },
+      "output": true,
+      "meta": [],
+      "outputType": "array",
+      "type": "dbcustom_query"
+    }
+  }
+}

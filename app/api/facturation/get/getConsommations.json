@@ -1,0 +1,82 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      },
+      {
+        "type": "text",
+        "name": "id_contrat"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "query",
+      "module": "dbupdater",
+      "action": "custom",
+      "options": {
+        "connection": "TEST",
+        "sql": {
+          "query": "SELECT PE.DUREE,CT.PS, RL.CONSOMMATION, RL.INDEX_A, RL.MOY_CONSOMMATION, RL.DATE_RELEVE, RL1.INDEX_A AS INDEX_PREC,  RL1.DATE_RELEVE AS DATE_RELEVE_PREC, CT.SOLDE_COMPTE , CT.STATUT_CONTRAT FROM RELEVE RL, CONTRAT CT, PERIODE PE, RELEVE RL1 WHERE     RL.ID_CONTRAT = CT.ID_CONTRAT AND RL.ID_PERIODE = PE.ID_PERIODE AND RL.ID_PERIODE_PREC = RL1.NUM_RELEVE (+) AND (RL.ID_CONTRAT = :P1)  ORDER BY PE.DATE_PERIODE DESC",
+          "params": [
+            {
+              "name": ":P1",
+              "value": "{{$_GET.id_contrat}}",
+              "test": "340987"
+            }
+          ]
+        }
+      },
+      "output": true,
+      "meta": [
+        {
+          "name": "duree",
+          "type": "number"
+        },
+        {
+          "name": "ps",
+          "type": "number"
+        },
+        {
+          "name": "consommation",
+          "type": "number"
+        },
+        {
+          "name": "index_a",
+          "type": "number"
+        },
+        {
+          "name": "moy_consommation",
+          "type": "number"
+        },
+        {
+          "name": "date_releve",
+          "type": "datetime"
+        },
+        {
+          "name": "index_prec",
+          "type": "number"
+        },
+        {
+          "name": "date_releve_prec",
+          "type": "datetime"
+        },
+        {
+          "name": "solde_compte",
+          "type": "number"
+        },
+        {
+          "name": "statut_contrat",
+          "type": "number"
+        }
+      ],
+      "type": "dbcustom_query"
+    }
+  }
+}

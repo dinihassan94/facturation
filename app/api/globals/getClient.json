@@ -1,0 +1,121 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "id_contrat"
+      }
+    ],
+    "$_POST": [
+      {
+        "type": "text",
+        "name": "id_contrat"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "client",
+      "module": "dbupdater",
+      "action": "custom",
+      "options": {
+        "connection": "TEST",
+        "sql": {
+          "query": "SELECT * FROM view_f_hors_tournee WHERE id_contrat =:P1  ORDER BY TYPE_IND",
+          "params": [
+            {
+              "name": ":P1",
+              "value": "{{$_POST.id_contrat}}",
+              "test": "91661",
+              "recid": 1
+            }
+          ]
+        }
+      },
+      "output": true,
+      "meta": [
+        {
+          "name": "nom",
+          "type": "text"
+        },
+        {
+          "name": "adr_physique",
+          "type": "text"
+        },
+        {
+          "name": "id_pl",
+          "type": "number"
+        },
+        {
+          "name": "code_support",
+          "type": "text"
+        },
+        {
+          "name": "id_contrat",
+          "type": "number"
+        },
+        {
+          "name": "accescompteur",
+          "type": "text"
+        },
+        {
+          "name": "etatpl",
+          "type": "text"
+        },
+        {
+          "name": "etat_pl",
+          "type": "number"
+        },
+        {
+          "name": "num_cpteur",
+          "type": "number"
+        },
+        {
+          "name": "code_cpteur",
+          "type": "text"
+        },
+        {
+          "name": "etat_cpt",
+          "type": "number"
+        },
+        {
+          "name": "position",
+          "type": "number"
+        },
+        {
+          "name": "consom_moyen",
+          "type": "number"
+        },
+        {
+          "name": "poscontrat",
+          "type": "text"
+        },
+        {
+          "name": "type_cpteur",
+          "type": "number"
+        },
+        {
+          "name": "codepl",
+          "type": "text"
+        },
+        {
+          "name": "type_ind",
+          "type": "text"
+        },
+        {
+          "name": "id_client",
+          "type": "number"
+        },
+        {
+          "name": "inst_phys",
+          "type": "text"
+        },
+        {
+          "name": "statut_contrat",
+          "type": "number"
+        }
+      ],
+      "type": "dbcustom_query"
+    }
+  }
+}

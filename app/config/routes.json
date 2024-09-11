@@ -1,0 +1,79 @@
+{
+  "routes": [
+    {
+      "path": "/views/tournee",
+      "page": "views/tournee",
+      "layout": "main",
+      "data": {
+        "title": "Tournées"
+      },
+      "exec": "/api/globals/isConnected"
+    },
+    {
+      "path": "/auth/login",
+      "page": "auth/login",
+      "layout": "deconnected",
+      "exec": ""
+    },
+    {
+      "path": "/views/releve",
+      "page": "views/releve",
+      "layout": "main",
+      "data": {
+        "title": "Releves"
+      },
+      "exec": "/api/globals/isConnected"
+    },
+    {
+      "path": "/",
+      "page": "index",
+      "layout": "main",
+      "exec": "/api/globals/isConnected"
+    },
+    {
+      "path": "/views/rapport",
+      "page": "views/rapport",
+      "layout": "main",
+      "data": {
+        "title": "Rapport"
+      },
+      "exec": "/api/globals/isConnected"
+    },
+    {
+      "path": "/views/releve_cloture",
+      "page": "views/releve_cloture",
+      "layout": "main"
+    },
+    {
+      "path": "/views/releve_mobile",
+      "page": "views/releve_mobile",
+      "layout": "main",
+      "exec": "/api/globals/isConnected",
+      "data": {
+        "title": "Releve Mobile"
+      }
+    },
+    {
+      "path": "/views/releve_admin",
+      "page": "views/releve_admin",
+      "layout": "main",
+      "exec": "/api/globals/isConnected"
+    },
+    {
+      "path": "/manuelle",
+      "page": "manuelle",
+      "layout": "main",
+      "exec": "/api/globals/isConnected"
+    }
+  ],
+  "layouts": {
+    "main": {
+      "meta": [
+        {
+          "type": "text",
+          "name": "title"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      },
+      {
+        "type": "text",
+        "name": "id_periode"
+      }
+    ],
+    "$_POST": [
+      {
+        "type": "text",
+        "name": "periode"
+      },
+      {
+        "type": "text",
+        "name": "bordereau"
+      },
+      {
+        "type": "text",
+        "name": "compteur"
+      },
+      {
+        "type": "text",
+        "name": "pl"
+      },
+      {
+        "type": "text",
+        "name": "tournee"
+      },
+      {
+        "type": "text",
+        "name": "statut"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "getReleveMobile",
+      "module": "dbupdater",
+      "action": "custom",
+      "options": {
+        "connection": "edbdev",
+        "sql": {
+          "query": "select * from view_index_eddmobile where id_periode=? order by num_tourne,num_bordereaux",
+          "params": [
+            {
+              "name": "?",
+              "value": "{{$_GET.id_periode}}",
+              "test": "499"
+            }
+          ]
+        }
+      },
+      "output": true,
+      "meta": [
+        {
+          "name": "num_releve",
+          "type": "number"
+        },
+        {
+          "name": "num_tourne",
+          "type": "number"
+        },
+        {
+          "name": "num_bordereaux",
+          "type": "number"
+        },
+        {
+          "name": "code_cpteur",
+          "type": "text"
+        },
+        {
+          "name": "index_a",
+          "type": "number"
+        },
+        {
+          "name": "adr_physique",
+          "type": "text"
+        },
+        {
+          "name": "consommation",
+          "type": "number"
+        },
+        {
+          "name": "date_releve",
+          "type": "datetime"
+        },
+        {
+          "name": "nouveau_index_tmp",
+          "type": "number"
+        },
+        {
+          "name": "statut_tmp",
+          "type": "text"
+        },
+        {
+          "name": "nom_periode",
+          "type": "text"
+        },
+        {
+          "name": "matricule",
+          "type": "number"
+        },
+        {
+          "name": "id_periode_prec",
+          "type": "number"
+        },
+        {
+          "name": "id_contrat",
+          "type": "number"
+        },
+        {
+          "name": "facture_faite",
+          "type": "text"
+        },
+        {
+          "name": "id_ligne",
+          "type": "number"
+        },
+        {
+          "name": "id_periode",
+          "type": "number"
+        },
+        {
+          "name": "statut_releve",
+          "type": "number"
+        },
+        {
+          "name": "num_cellule",
+          "type": "number"
+        },
+        {
+          "name": "nom_cellule",
+          "type": "text"
+        }
+      ],
+      "type": "dbcustom_query"
+    }
+  }
+}

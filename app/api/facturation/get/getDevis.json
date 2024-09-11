@@ -1,0 +1,851 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "contrat_en_cours"
+      },
+      {
+        "type": "text",
+        "name": "num_dossier"
+      },
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      },
+      {
+        "type": "text",
+        "name": "num_depannage"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "",
+      "module": "core",
+      "action": "condition",
+      "options": {
+        "if": "{{!$_GET.num_depannage}}",
+        "then": {
+          "steps": [
+            {
+              "name": "client",
+              "module": "dbupdater",
+              "action": "custom",
+              "options": {
+                "connection": "TEST",
+                "sql": {
+                  "query": "SELECT * FROM  DEVIS D INNER JOIN N_DOSSIER_CLIENT N ON D.NDOSSIER = N.NUM_DOSSIER WHERE D.ANNULATION<>'O' AND  (N.CONTRAT_EN_COURS = :P1 and N.NUM_DOSSIER=:P2)",
+                  "params": [
+                    {
+                      "name": ":P1",
+                      "value": "{{$_GET.contrat_en_cours}}",
+                      "test": "337933",
+                      "recid": 1
+                    },
+                    {
+                      "name": ":P2",
+                      "value": "{{$_GET.num_dossier}}",
+                      "test": "108435",
+                      "recid": 2
+                    }
+                  ]
+                }
+              },
+              "output": true,
+              "meta": [
+                {
+                  "name": "num_devis",
+                  "type": "number"
+                },
+                {
+                  "name": "date_emission",
+                  "type": "datetime"
+                },
+                {
+                  "name": "date_echeance",
+                  "type": "datetime"
+                },
+                {
+                  "name": "n_devis",
+                  "type": "text"
+                },
+                {
+                  "name": "message",
+                  "type": "text"
+                },
+                {
+                  "name": "num_facture",
+                  "type": "number"
+                },
+                {
+                  "name": "num_contrat",
+                  "type": "number"
+                },
+                {
+                  "name": "montant",
+                  "type": "number"
+                },
+                {
+                  "name": "nature_prestation",
+                  "type": "number"
+                },
+                {
+                  "name": "type_mvt_portefeuille",
+                  "type": "number"
+                },
+                {
+                  "name": "coment",
+                  "type": "text"
+                },
+                {
+                  "name": "annulation",
+                  "type": "text"
+                },
+                {
+                  "name": "motif_mvt",
+                  "type": "number"
+                },
+                {
+                  "name": "ps",
+                  "type": "number"
+                },
+                {
+                  "name": "categ",
+                  "type": "number"
+                },
+                {
+                  "name": "id_pl",
+                  "type": "number"
+                },
+                {
+                  "name": "adr_pl",
+                  "type": "text"
+                },
+                {
+                  "name": "code_pl_phys",
+                  "type": "text"
+                },
+                {
+                  "name": "code_compteur",
+                  "type": "text"
+                },
+                {
+                  "name": "id_util",
+                  "type": "number"
+                },
+                {
+                  "name": "id_payeur",
+                  "type": "number"
+                },
+                {
+                  "name": "date_maj",
+                  "type": "datetime"
+                },
+                {
+                  "name": "date_crea",
+                  "type": "datetime"
+                },
+                {
+                  "name": "user_maj",
+                  "type": "number"
+                },
+                {
+                  "name": "user_crea",
+                  "type": "number"
+                },
+                {
+                  "name": "date_st_paye",
+                  "type": "datetime"
+                },
+                {
+                  "name": "montant_tva",
+                  "type": "number"
+                },
+                {
+                  "name": "nom_payeur",
+                  "type": "text"
+                },
+                {
+                  "name": "adresse_payeur",
+                  "type": "text"
+                },
+                {
+                  "name": "titre",
+                  "type": "text"
+                },
+                {
+                  "name": "num_cellule",
+                  "type": "number"
+                },
+                {
+                  "name": "valide",
+                  "type": "text"
+                },
+                {
+                  "name": "facture_faite",
+                  "type": "text"
+                },
+                {
+                  "name": "ndossier",
+                  "type": "number"
+                },
+                {
+                  "name": "support",
+                  "type": "text"
+                },
+                {
+                  "name": "annul_devis",
+                  "type": "text"
+                },
+                {
+                  "name": "statut_devis",
+                  "type": "number"
+                },
+                {
+                  "name": "valider_ac",
+                  "type": "text"
+                },
+                {
+                  "name": "date_valider_ac",
+                  "type": "datetime"
+                },
+                {
+                  "name": "travaux_neuf",
+                  "type": "text"
+                },
+                {
+                  "name": "accepter_sans_tva",
+                  "type": "text"
+                },
+                {
+                  "name": "complexite_travaux",
+                  "type": "number"
+                },
+                {
+                  "name": "num_dossier",
+                  "type": "number"
+                },
+                {
+                  "name": "nom_client",
+                  "type": "text"
+                },
+                {
+                  "name": "cin",
+                  "type": "text"
+                },
+                {
+                  "name": "pl",
+                  "type": "text"
+                },
+                {
+                  "name": "compteur",
+                  "type": "text"
+                },
+                {
+                  "name": "registre_commerce",
+                  "type": "text"
+                },
+                {
+                  "name": "date_crea",
+                  "type": "datetime"
+                },
+                {
+                  "name": "user_crea",
+                  "type": "number"
+                },
+                {
+                  "name": "adresse",
+                  "type": "text"
+                },
+                {
+                  "name": "quartier",
+                  "type": "text"
+                },
+                {
+                  "name": "portable",
+                  "type": "number"
+                },
+                {
+                  "name": "email",
+                  "type": "text"
+                },
+                {
+                  "name": "support_proche",
+                  "type": "text"
+                },
+                {
+                  "name": "num_doc_analyse",
+                  "type": "number"
+                },
+                {
+                  "name": "type_habitation",
+                  "type": "number"
+                },
+                {
+                  "name": "equipement_tex",
+                  "type": "text"
+                },
+                {
+                  "name": "intervention_dmd",
+                  "type": "number"
+                },
+                {
+                  "name": "categ_client",
+                  "type": "number"
+                },
+                {
+                  "name": "ps_estime",
+                  "type": "number"
+                },
+                {
+                  "name": "observation",
+                  "type": "text"
+                },
+                {
+                  "name": "user_maj",
+                  "type": "number"
+                },
+                {
+                  "name": "date_maj",
+                  "type": "datetime"
+                },
+                {
+                  "name": "id_statut",
+                  "type": "number"
+                },
+                {
+                  "name": "id_piece",
+                  "type": "text"
+                },
+                {
+                  "name": "type_piece",
+                  "type": "text"
+                },
+                {
+                  "name": "date_demande",
+                  "type": "datetime"
+                },
+                {
+                  "name": "statut_client",
+                  "type": "number"
+                },
+                {
+                  "name": "contrat_en_cours",
+                  "type": "number"
+                },
+                {
+                  "name": "id_client",
+                  "type": "number"
+                },
+                {
+                  "name": "nombre_compteur",
+                  "type": "number"
+                },
+                {
+                  "name": "ps_souhaitee",
+                  "type": "text"
+                },
+                {
+                  "name": "type_clientele",
+                  "type": "number"
+                },
+                {
+                  "name": "supprime",
+                  "type": "text"
+                },
+                {
+                  "name": "contrat_r_prec",
+                  "type": "number"
+                },
+                {
+                  "name": "id_client_util",
+                  "type": "number"
+                }
+              ],
+              "type": "dbcustom_query"
+            },
+            {
+              "name": "detailsdevis",
+              "module": "dbupdater",
+              "action": "custom",
+              "options": {
+                "connection": "TEST",
+                "sql": {
+                  "query": "SELECT     V.LIBELLE, V.QUANTITE,V.PRIX_UNITAIRE,  V.NUM_LIGNE_TARIFAIRE, V.QUANTITE * V.PRIX_UNITAIRE AS MONTANT, V.QUANTITE * V.PRIX_UNITAIRE AS TOTAL,  V.NUM_CONTRAT, V.STATUT_DEVIS FROM  VIEW_DETAILS_DEVIS V INNER JOIN LIGNE_TARIF L ON V.NUM_LIGNE_TARIFAIRE = L.ID_LIGNE_TARIF  where V.N_DEVIS = :P1 AND (L.METHODE_CALCUL <> 66)",
+                  "params": [
+                    {
+                      "name": ":P1",
+                      "value": "{{client[0].n_devis}}",
+                      "test": "2186T24",
+                      "recid": 1
+                    }
+                  ]
+                }
+              },
+              "output": true,
+              "meta": [
+                {
+                  "name": "libelle",
+                  "type": "text"
+                },
+                {
+                  "name": "quantite",
+                  "type": "number"
+                },
+                {
+                  "name": "prix_unitaire",
+                  "type": "number"
+                },
+                {
+                  "name": "num_ligne_tarifaire",
+                  "type": "number"
+                },
+                {
+                  "name": "montant",
+                  "type": "number"
+                },
+                {
+                  "name": "total",
+                  "type": "number"
+                },
+                {
+                  "name": "num_contrat",
+                  "type": "number"
+                },
+                {
+                  "name": "statut_devis",
+                  "type": "number"
+                }
+              ],
+              "type": "dbcustom_query",
+              "outputType": "array"
+            }
+          ]
+        },
+        "else": {
+          "steps": [
+            {
+              "name": "detailsdevis",
+              "module": "dbupdater",
+              "action": "custom",
+              "options": {
+                "connection": "TEST",
+                "sql": {
+                  "query": "SELECT * FROM VIEW_DETAILS_DEPANNAGE where NUM_DEPANNAGE = :P1",
+                  "params": [
+                    {
+                      "name": ":P1",
+                      "value": "{{$_GET.num_depannage}}",
+                      "test": "202306000185"
+                    }
+                  ]
+                }
+              },
+              "output": true,
+              "meta": [
+                {
+                  "name": "libelle",
+                  "type": "text"
+                },
+                {
+                  "name": "quantite",
+                  "type": "number"
+                },
+                {
+                  "name": "prix_unitaire",
+                  "type": "number"
+                },
+                {
+                  "name": "num_ligne_tarifaire",
+                  "type": "number"
+                },
+                {
+                  "name": "montant",
+                  "type": "number"
+                },
+                {
+                  "name": "total",
+                  "type": "number"
+                },
+                {
+                  "name": "num_ano",
+                  "type": "number"
+                },
+                {
+                  "name": "unite",
+                  "type": "text"
+                },
+                {
+                  "name": "facture",
+                  "type": "text"
+                },
+                {
+                  "name": "ligne_tarif_parent",
+                  "type": "number"
+                },
+                {
+                  "name": "code_article",
+                  "type": "number"
+                },
+                {
+                  "name": "id_contrat",
+                  "type": "number"
+                },
+                {
+                  "name": "id_statut",
+                  "type": "number"
+                },
+                {
+                  "name": "num_depannage",
+                  "type": "number"
+                },
+                {
+                  "name": "localisation",
+                  "type": "text"
+                }
+              ],
+              "type": "dbcustom_query"
+            },
+            {
+              "name": "client",
+              "module": "dbupdater",
+              "action": "custom",
+              "options": {
+                "connection": "TEST",
+                "sql": {
+                  "query": "SELECT * FROM  DEVIS D INNER JOIN N_DOSSIER_CLIENT N ON D.NDOSSIER = N.NUM_DOSSIER WHERE D.ANNULATION<>'O' AND  N.CONTRAT_EN_COURS = :P1 ",
+                  "params": [
+                    {
+                      "name": ":P1",
+                      "value": "{{detailsdevis[0].id_contrat}}",
+                      "test": "337933"
+                    }
+                  ]
+                }
+              },
+              "output": true,
+              "meta": [
+                {
+                  "name": "num_devis",
+                  "type": "number"
+                },
+                {
+                  "name": "date_emission",
+                  "type": "datetime"
+                },
+                {
+                  "name": "date_echeance",
+                  "type": "datetime"
+                },
+                {
+                  "name": "n_devis",
+                  "type": "text"
+                },
+                {
+                  "name": "message",
+                  "type": "text"
+                },
+                {
+                  "name": "num_facture",
+                  "type": "number"
+                },
+                {
+                  "name": "num_contrat",
+                  "type": "number"
+                },
+                {
+                  "name": "montant",
+                  "type": "number"
+                },
+                {
+                  "name": "nature_prestation",
+                  "type": "number"
+                },
+                {
+                  "name": "type_mvt_portefeuille",
+                  "type": "number"
+                },
+                {
+                  "name": "coment",
+                  "type": "text"
+                },
+                {
+                  "name": "annulation",
+                  "type": "text"
+                },
+                {
+                  "name": "motif_mvt",
+                  "type": "number"
+                },
+                {
+                  "name": "ps",
+                  "type": "number"
+                },
+                {
+                  "name": "categ",
+                  "type": "number"
+                },
+                {
+                  "name": "id_pl",
+                  "type": "number"
+                },
+                {
+                  "name": "adr_pl",
+                  "type": "text"
+                },
+                {
+                  "name": "code_pl_phys",
+                  "type": "text"
+                },
+                {
+                  "name": "code_compteur",
+                  "type": "text"
+                },
+                {
+                  "name": "id_util",
+                  "type": "number"
+                },
+                {
+                  "name": "id_payeur",
+                  "type": "number"
+                },
+                {
+                  "name": "date_maj",
+                  "type": "datetime"
+                },
+                {
+                  "name": "date_crea",
+                  "type": "datetime"
+                },
+                {
+                  "name": "user_maj",
+                  "type": "number"
+                },
+                {
+                  "name": "user_crea",
+                  "type": "number"
+                },
+                {
+                  "name": "date_st_paye",
+                  "type": "datetime"
+                },
+                {
+                  "name": "montant_tva",
+                  "type": "number"
+                },
+                {
+                  "name": "nom_payeur",
+                  "type": "text"
+                },
+                {
+                  "name": "adresse_payeur",
+                  "type": "text"
+                },
+                {
+                  "name": "titre",
+                  "type": "text"
+                },
+                {
+                  "name": "num_cellule",
+                  "type": "number"
+                },
+                {
+                  "name": "valide",
+                  "type": "text"
+                },
+                {
+                  "name": "facture_faite",
+                  "type": "text"
+                },
+                {
+                  "name": "ndossier",
+                  "type": "number"
+                },
+                {
+                  "name": "support",
+                  "type": "text"
+                },
+                {
+                  "name": "annul_devis",
+                  "type": "text"
+                },
+                {
+                  "name": "statut_devis",
+                  "type": "number"
+                },
+                {
+                  "name": "valider_ac",
+                  "type": "text"
+                },
+                {
+                  "name": "date_valider_ac",
+                  "type": "datetime"
+                },
+                {
+                  "name": "travaux_neuf",
+                  "type": "text"
+                },
+                {
+                  "name": "accepter_sans_tva",
+                  "type": "text"
+                },
+                {
+                  "name": "complexite_travaux",
+                  "type": "number"
+                },
+                {
+                  "name": "num_dossier",
+                  "type": "number"
+                },
+                {
+                  "name": "nom_client",
+                  "type": "text"
+                },
+                {
+                  "name": "cin",
+                  "type": "text"
+                },
+                {
+                  "name": "pl",
+                  "type": "text"
+                },
+                {
+                  "name": "compteur",
+                  "type": "text"
+                },
+                {
+                  "name": "registre_commerce",
+                  "type": "text"
+                },
+                {
+                  "name": "date_crea",
+                  "type": "datetime"
+                },
+                {
+                  "name": "user_crea",
+                  "type": "number"
+                },
+                {
+                  "name": "adresse",
+                  "type": "text"
+                },
+                {
+                  "name": "quartier",
+                  "type": "text"
+                },
+                {
+                  "name": "portable",
+                  "type": "number"
+                },
+                {
+                  "name": "email",
+                  "type": "text"
+                },
+                {
+                  "name": "support_proche",
+                  "type": "text"
+                },
+                {
+                  "name": "num_doc_analyse",
+                  "type": "number"
+                },
+                {
+                  "name": "type_habitation",
+                  "type": "number"
+                },
+                {
+                  "name": "equipement_tex",
+                  "type": "text"
+                },
+                {
+                  "name": "intervention_dmd",
+                  "type": "number"
+                },
+                {
+                  "name": "categ_client",
+                  "type": "number"
+                },
+                {
+                  "name": "ps_estime",
+                  "type": "number"
+                },
+                {
+                  "name": "observation",
+                  "type": "text"
+                },
+                {
+                  "name": "user_maj",
+                  "type": "number"
+                },
+                {
+                  "name": "date_maj",
+                  "type": "datetime"
+                },
+                {
+                  "name": "id_statut",
+                  "type": "number"
+                },
+                {
+                  "name": "id_piece",
+                  "type": "text"
+                },
+                {
+                  "name": "type_piece",
+                  "type": "text"
+                },
+                {
+                  "name": "date_demande",
+                  "type": "datetime"
+                },
+                {
+                  "name": "statut_client",
+                  "type": "number"
+                },
+                {
+                  "name": "contrat_en_cours",
+                  "type": "number"
+                },
+                {
+                  "name": "id_client",
+                  "type": "number"
+                },
+                {
+                  "name": "nombre_compteur",
+                  "type": "number"
+                },
+                {
+                  "name": "ps_souhaitee",
+                  "type": "text"
+                },
+                {
+                  "name": "type_clientele",
+                  "type": "number"
+                },
+                {
+                  "name": "supprime",
+                  "type": "text"
+                },
+                {
+                  "name": "contrat_r_prec",
+                  "type": "number"
+                },
+                {
+                  "name": "id_client_util",
+                  "type": "number"
+                }
+              ],
+              "type": "dbcustom_query",
+              "outputType": "array"
+            }
+          ]
+        }
+      },
+      "outputType": "boolean"
+    }
+  }
+}

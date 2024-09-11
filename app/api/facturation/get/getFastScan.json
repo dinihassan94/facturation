@@ -1,0 +1,165 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/manuelle.ejs",
+      "linkedForm": "searchFastScanForm"
+    },
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ],
+    "$_POST": [
+      {
+        "type": "text",
+        "fieldName": "dossier",
+        "name": "dossier"
+      },
+      {
+        "type": "text",
+        "fieldName": "nom",
+        "name": "nom"
+      },
+      {
+        "type": "text",
+        "fieldName": "support",
+        "name": "support"
+      },
+      {
+        "type": "text",
+        "fieldName": "statut",
+        "name": "statut"
+      },
+      {
+        "type": "text",
+        "fieldName": "cellule",
+        "name": "cellule"
+      },
+      {
+        "type": "text",
+        "fieldName": "date",
+        "name": "date"
+      },
+      {
+        "type": "text",
+        "fieldName": "intervention",
+        "name": "intervention"
+      },
+      {
+        "type": "text",
+        "fieldName": "contrat",
+        "name": "contrat"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "query",
+      "module": "dbupdater",
+      "action": "custom",
+      "options": {
+        "connection": "TEST",
+        "sql": {
+          "query": "SELECT        NUM_DOSSIER, ID_CLIENT, NOM_CLIENT, ADRESSE, NOMBRE_COMPTEUR, SUPPORT_PROCHE, LIB_LONG, USER_CREA, LIB_COURT, DATE_CREA, PL,CONTRAT_EN_COURS, NOM_CELLULE_RESPO, N_DEVIS , PS_SOUHAITEE AS PS,ID_STATUT,NUM_CELLULE_RESPO,TYPE_CLIENTELE,CONTRAT_R_PREC AS RM1 , INTERVENTION_DMD FROM VIEW_N_DOSSIER_PL_DEVIS_GEN2 VW where NUM_DOSSIER is not null and supprime='N' and INTERVENTION_DMD=:P1 and ID_STATUT =1710",
+          "params": [
+            {
+              "name": ":P1",
+              "value": "{{$_POST.intervention}}",
+              "test": "520",
+              "recid": 1
+            }
+          ]
+        }
+      },
+      "output": true,
+      "meta": [
+        {
+          "name": "num_dossier",
+          "type": "number"
+        },
+        {
+          "name": "id_client",
+          "type": "number"
+        },
+        {
+          "name": "nom_client",
+          "type": "text"
+        },
+        {
+          "name": "adresse",
+          "type": "text"
+        },
+        {
+          "name": "nombre_compteur",
+          "type": "number"
+        },
+        {
+          "name": "support_proche",
+          "type": "text"
+        },
+        {
+          "name": "lib_long",
+          "type": "text"
+        },
+        {
+          "name": "user_crea",
+          "type": "number"
+        },
+        {
+          "name": "lib_court",
+          "type": "text"
+        },
+        {
+          "name": "date_crea",
+          "type": "datetime"
+        },
+        {
+          "name": "pl",
+          "type": "text"
+        },
+        {
+          "name": "contrat_en_cours",
+          "type": "number"
+        },
+        {
+          "name": "nom_cellule_respo",
+          "type": "text"
+        },
+        {
+          "name": "n_devis",
+          "type": "text"
+        },
+        {
+          "name": "ps",
+          "type": "text"
+        },
+        {
+          "name": "id_statut",
+          "type": "number"
+        },
+        {
+          "name": "num_cellule_respo",
+          "type": "number"
+        },
+        {
+          "name": "type_clientele",
+          "type": "number"
+        },
+        {
+          "name": "rm1",
+          "type": "number"
+        },
+        {
+          "name": "intervention_dmd",
+          "type": "number"
+        }
+      ],
+      "type": "dbcustom_query"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+.details-client{
+    border: solid 1px black ;
+    margin: 10px ;
+    padding: 10px ;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.alert{
+    border: solid 1px var(--tertiary);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.label{
+    margin-right: 5px;
+    font-weight: 500;
+font-size: small;
+    color: var(--primary);
+}
+
+th{
+    color: var(--primary) !important;
+
+}
+.montant{
+    background-color: var(--secondary);
+}
+

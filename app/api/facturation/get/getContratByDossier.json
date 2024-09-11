@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/manuelle.ejs",
+      "linkedForm": "searchByDossier"
+    },
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ],
+    "$_POST": [
+      {
+        "type": "text",
+        "fieldName": "id_dossier",
+        "name": "id_dossier"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "query",
+      "module": "dbupdater",
+      "action": "custom",
+      "options": {
+        "connection": "TEST",
+        "sql": {
+          "query": "SELECT CONTRAT_EN_COURS FROM N_DOSSIER_CLIENT WHERE NUM_DOSSIER=:P1",
+          "params": [
+            {
+              "name": ":P1",
+              "value": "{{$_POST.id_dossier}}",
+              "test": "111017"
+            }
+          ]
+        }
+      },
+      "output": true,
+      "meta": [
+        {
+          "name": "contrat_en_cours",
+          "type": "number"
+        }
+      ],
+      "type": "dbcustom_query"
+    }
+  }
+}

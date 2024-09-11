@@ -1,0 +1,197 @@
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="index" appconnect="local" components="{dmxFormatter:{},dmxDatePicker:{},dmxValidator:{}}" jquery_slim_35="cdn" moment_2="cdn" dmx-style="" -->
+<dmx-serverconnect id="getLastReleveIndex" url="/api/releve/get/getLastReleveIndex" noload="true"></dmx-serverconnect>
+<meta name="ac:route" content="/">
+<div class="container-fluid">
+
+    <div class="row mb-3  ">
+
+        <div class="col-4 details-client ">
+            <div class="row ">
+                <div class="col-12 d-flex flex-row justify-content-start align-items-center">
+                    <form id="getClientForm" is="dmx-serverconnect-form" action="/api/globals/getClient" dmx-on:success="run({condition:{outputType:'boolean',if:`getClientForm.data.client[0].statut_contrat==4||getClientForm.data.client[0].statut_contrat==7`,then:{steps:{run:{outputType:'text',action:`notifies1.success(\'Utilisateur recuperé avec succés\');getLastReleveIndex.load({id_pl: getClientForm.data.client[0].id_pl},true)`}}},else:{steps:{run:{outputType:'text',action:`notifies1.danger(\'Vous ne pouvez pas utiliser ce contrat. Veuillez entrer un contrat BT.\')`}}}}})" method="post" class="d-flex">
+
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td class="heading-text">
+                                        <h6 class="heading-text">
+                                            Numero de contrat</h6>
+
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" id="input_idcontrat" name="id_contrat" aria-describedby="input2_help">
+                                    </td>
+                                    <td>
+                                        <button id="btn1" class="btn btn-primary" type="submit">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <a id="btn_" is="dmx-button" value="" dmx-on:click="modal2.show()" data-bs-toggle="modal" data-bs-target="#modal1"><b>Plus de détails...</b></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+
+
+
+                    </form>
+
+                </div>
+                <div class="col-6">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row" class="label">
+                                    <h6>Nom Payeur:</h6>
+                                </th>
+                                <td class="content">
+                                    <p dmx-text="getClientForm.data.client[0].nom"></p>
+                                </td>
+                                <th scope="row" class="label">
+                                    <h6>Adresse:</h6>
+                                </th>
+                                <td class="content">
+                                    <p dmx-text="getClientForm.data.client[0].adr_physique"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="label">
+                                    <h6>Numéro de compteur:</h6>
+                                </th>
+                                <td class="content">
+                                    <p dmx-text="getClientForm.data.client[0].code_cpteur"></p>
+                                </td>
+                                <th scope="row" class="label">
+                                    <h6>Position contrat:</h6>
+                                </th>
+                                <td class="content">
+                                    <p dmx-text="getClientForm.data.client[0].poscontrat"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="label">
+                                    <h6>
+                                        Code PL:</h6>
+                                </th>
+                                <td class="content">
+                                    <p dmx-text="getClientForm.data.client[0].codepl"></p>
+                                </td>
+                                <th scope="row" class="label">
+                                    <h6>Support:</h6>
+                                </th>
+                                <td class="content">
+                                    <p dmx-text="getClientForm.data.client[0].code_support"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="label">
+                                    <h6>Etat PL:</h6>
+                                </th>
+                                <td class="content">
+                                    <p dmx-text="getClientForm.data.client[0].etatpl"></p>
+                                </td>
+                                <th scope="row" class="label">
+                                    <h6>Acces compteur:</h6>
+                                </th>
+                                <td class="content">
+                                    <p dmx-text="getClientForm.data.client[0].accescompteur"></p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="col-7 details-client">
+            <form id="estimationForm" method="post" is="dmx-serverconnect-form" action="/api/conso/post/estimeCOnso" dmx-on:success="notifies1.success(estimationForm.data.query[0].conso?'Facture estimée avec succés':'Veuillez entrez un contrat BT')">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td class="label">
+                                Relève précèdente
+                            </td>
+                            <td class="content">
+                                <input type="text" class="form-control " id="input1" name="input1" aria-describedby="input1_help" dmx-bind:value="getLastReleveIndex.data.query[0].index_a" readonly="true">
+                            </td>
+                            <td class="label">
+                                Date de la relève précèdente </td>
+                            <td class="content">
+                                <input type="text" class="form-control " id="input2" name="input2" aria-describedby="input1_help" dmx-bind:value="getLastReleveIndex.data.query[0].date_releve.formatDate('dd-MM-yyyy')" readonly="true">
+                            </td>
+                            <td class="label">
+                                Index </td>
+                            <td class="content">
+                                <input type="text" class="form-control " id="index_a" name="index_a" aria-describedby="input1_help" required="">
+                                <input type="text" class="form-control  visually-hidden" id="id_contrat" name="id_contrat" aria-describedby="input1_help" dmx-bind:value="getClientForm.data.client[0].id_contrat">
+                            </td>
+                            <td class="label">
+                                Date relève
+                            </td>
+                            <td class="content">
+                                <input id="date_releve" name="date_releve" is="dmx-date-picker" format="L" disableweekends="true" customdates-class="'form-control'" class="form-control " required="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button id="calcul" class="btn btn-primary btn-sm" type="submit" dmx-bind:disabled="index_a.invalid&amp;&amp;date_releve.invalid">Calculer</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+            <div class="d-flex flex-column">
+
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th scope="row">Montant</th>
+                            <td>
+                                <input type="text" class="form-control" id="input3" name="input3" aria-describedby="input3_help" readonly="true" dmx-bind:value="estimationForm.data.query[0].montant">
+                            </td>
+                            <th scope="row">Consommation</th>
+                            <td>
+                                <input type="text" class="form-control" id="input4" name="input4" aria-describedby="input3_help" readonly="true" dmx-bind:value="estimationForm.data.query[0].conso">
+                            </td>
+                            <th scope="row">Anomalie</th>
+                            <td>
+                                <input type="text" class="form-control" id="input5" name="input5" aria-describedby="input3_help" readonly="true" dmx-bind:value="estimationForm.data.query[0].message?estimationForm.data.query[0].message:'Aucune anomalie'">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td dmx-show="estimationForm.data.query[0].message=='consommation élevée !'" colspan="6" rowspan="6" class="text-center align-middle table-danger">
+
+                                <div class="d-flex alert align-items-center justify-content-center">
+                                    <p class="text-danger text-center"><i class="fas fa-exclamation"></i>
+
+                                        Consommation trop elevée!!
+                                        <i class="fas fa-exclamation"></i>
+                                    </p>
+                                </div>
+
+                            </td>
+                            <td dmx-show="estimationForm.data.query[0] && estimationForm.data.query[0].message!=='consommation élevée !'" colspan="6" rowspan="6" class="table-success align-middle">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <p class="text-success text-center"><i class="fas fa-exclamation"></i>
+
+                                        Aucune anomalie
+                                        <i class="fas fa-exclamation"></i>
+                                    </p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

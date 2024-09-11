@@ -1,0 +1,25 @@
+.btn-warning{
+    background: var(--warning);
+    color: var(--primary);
+  }
+  .btn-primary{
+    background: var(--primary);
+    color: white;
+  }
+  .btn-primary:hover{
+    background: var(--primary);
+  }
+
+  .btn-success{
+    background: var(--quinary);
+    color: white;
+  }
+  .btn-success:hover{
+    background: var(--primary);
+  }
+
+
+  .btn-danger{
+    background: var(--tertiary);
+    color: white;
+  }

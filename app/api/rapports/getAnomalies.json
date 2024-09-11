@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "anomalies",
+      "module": "dbupdater",
+      "action": "custom",
+      "options": {
+        "connection": "edbtest",
+        "sql": {
+          "query": "select code, libelle from anomalie_releve where code in ('AB','CD','DT','CI','MI','SI','FD','RF','NS','PE','PF','IT')",
+          "params": []
+        }
+      },
+      "output": true,
+      "meta": [
+        {
+          "name": "code",
+          "type": "text"
+        },
+        {
+          "name": "libelle",
+          "type": "text"
+        }
+      ],
+      "type": "dbcustom_query"
+    }
+  }
+}

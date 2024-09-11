@@ -1,0 +1,14 @@
+.app-img{
+    width: 150px;
+}
+
+.img-wrapper{
+    height: 500px ;
+    position: relative;
+}
+
+.releve-image{
+    
+    height: 300px !important;
+    width: 300px !important;
+}

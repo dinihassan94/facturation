@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/manuelle.ejs",
+      "linkedForm": "searchByContrat"
+    },
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ],
+    "$_POST": [
+      {
+        "type": "text",
+        "fieldName": "id_contrat",
+        "name": "id_contrat"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "query",
+      "module": "dbupdater",
+      "action": "custom",
+      "options": {
+        "connection": "EDBDEV",
+        "sql": {
+          "query": "select  count(ID_CONTRAT ) from CONTRAT WHERE  ID_CONTRAT=:P1  AND POSITION in (12)",
+          "params": [
+            {
+              "name": ":P1",
+              "value": "{{$_POST.id_contrat}}",
+              "test": "340987"
+            }
+          ]
+        }
+      },
+      "output": true,
+      "meta": [
+        {
+          "name": "count",
+          "type": "number"
+        }
+      ],
+      "type": "dbcustom_query"
+    }
+  }
+}

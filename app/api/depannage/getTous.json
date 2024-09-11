@@ -1,0 +1,116 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "query",
+      "module": "dbupdater",
+      "action": "custom",
+      "options": {
+        "connection": "TEST",
+        "sql": {
+          "query": "select '' as CHK, num_depannage,NOM,localisation,PL, DATE_CREA, STATUT, ID_CONTRAT, compteur,\ntype_depannage,lib_ano_declaree, NOM_AGENT,USER_CREA,ID_TYPE_DEP, ATTRIBUER_A, \nID_STATUT, PRIORITE,ID_NATURE_DEPANNAGE,avec_materiel,nom_cellule_respo,num_cellule_respo \nfrom VIEW_DEPANNAGE \nwhere id_statut = 1819\norder by  DATE_CREA",
+          "params": []
+        }
+      },
+      "output": true,
+      "meta": [
+        {
+          "name": "chk",
+          "type": "text"
+        },
+        {
+          "name": "num_depannage",
+          "type": "number"
+        },
+        {
+          "name": "nom",
+          "type": "text"
+        },
+        {
+          "name": "localisation",
+          "type": "text"
+        },
+        {
+          "name": "pl",
+          "type": "text"
+        },
+        {
+          "name": "date_crea",
+          "type": "datetime"
+        },
+        {
+          "name": "statut",
+          "type": "text"
+        },
+        {
+          "name": "id_contrat",
+          "type": "number"
+        },
+        {
+          "name": "compteur",
+          "type": "text"
+        },
+        {
+          "name": "type_depannage",
+          "type": "text"
+        },
+        {
+          "name": "lib_ano_declaree",
+          "type": "text"
+        },
+        {
+          "name": "nom_agent",
+          "type": "text"
+        },
+        {
+          "name": "user_crea",
+          "type": "number"
+        },
+        {
+          "name": "id_type_dep",
+          "type": "number"
+        },
+        {
+          "name": "attribuer_a",
+          "type": "number"
+        },
+        {
+          "name": "id_statut",
+          "type": "number"
+        },
+        {
+          "name": "priorite",
+          "type": "text"
+        },
+        {
+          "name": "id_nature_depannage",
+          "type": "number"
+        },
+        {
+          "name": "avec_materiel",
+          "type": "text"
+        },
+        {
+          "name": "nom_cellule_respo",
+          "type": "text"
+        },
+        {
+          "name": "num_cellule_respo",
+          "type": "number"
+        }
+      ],
+      "type": "dbcustom_query"
+    }
+  }
+}

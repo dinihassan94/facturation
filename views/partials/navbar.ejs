@@ -1,0 +1,39 @@
+<!-- Wappler include jquery_slim_33="cdn" fontawesome_4="cdn" is="dmx-app" id="navbar" appconnect="local" bootstrap5="local" components="{dmxBootstrap5Navigation:{},dmxStateManagement:{},dmxBootstrap5TableGenerator:{},dmxBrowser:{},dmxNotifications:{}}" head-page="layouts/main" -->
+<dmx-notifications id="notifies1"></dmx-notifications>
+<div is="dmx-browser" id="browser1"></div>
+<dmx-serverconnect id="logout" url="/api/globals/logout" noload="true"></dmx-serverconnect>
+<dmx-local-manager id="connectedUser"></dmx-local-manager>
+<header class="placeholder-glow header">
+    <nav class="navbar translucent d-flex navbar-expand-lg bg-body ps-2 pe-2 flex-row align-items-center justify-content-between">
+
+
+
+        <div class="d-flex align-items-center">
+            <a class="navbar-brand ms-auto d-flex flex-column align-item-center" href="/">
+                <img src="/assets/images/edd.png" class="logo">
+            </a>
+            <h3 class="text-justify header fw-bolder lh-base">Facturation</h3>
+        </div>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarnavges" aria-controls="navbar1_collapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse flex-row d-lg-none justify-content-end" id="navbarnavges">
+
+            <div class="navbar-nav text-white justify-content-sm-start nav-pills">
+
+
+                <a class="nav-item nav-link text-center" href="/">Hors tournée</a>
+                <a class="nav-item nav-link text-center" href="/manuelle">Manuelle</a>
+                <button id="logOut" class="btn btn-sm btn-light text-danger ms-3 ps-3 pe-3" dmx-on:click="logout.load({});notifies1.warning('Vous êtes déconnecté');browser1.goto('/auth/login')">
+                    <i class="fa fa-power-off fa-2x"></i></button>
+
+
+            </div>
+
+        </div>
+
+
+
+    </nav>
+</header>

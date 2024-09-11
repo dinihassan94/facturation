@@ -1,0 +1,451 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/views/releve_admin.ejs",
+      "linkedForm": "getContratForm"
+    },
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ],
+    "$_POST": [
+      {
+        "type": "number",
+        "fieldName": "id_contrat",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": ""
+            },
+            "core:number": {
+              "param": ""
+            }
+          }
+        },
+        "name": "id_contrat"
+      }
+    ],
+    "$_COOKIE": [
+      {
+        "type": "text",
+        "name": "token"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "query",
+        "module": "dbupdater",
+        "action": "custom",
+        "options": {
+          "connection": "edbdev",
+          "sql": {
+            "query": "select DISTINCT cl.*,c.*, r.num_cpteur from client cl join role on role.num_client=cl.id_client join contrat c on c.id_contrat=role.num_contrat join releve r on r.id_contrat=role.num_contrat where role.num_contrat=:P1 limit 1",
+            "params": [
+              {
+                "name": ":P1",
+                "value": "{{$_POST.id_contrat}}",
+                "test": "45716",
+                "recid": 1
+              }
+            ]
+          }
+        },
+        "output": true,
+        "meta": [
+          {
+            "name": "id_client",
+            "type": "number"
+          },
+          {
+            "name": "nom",
+            "type": "text"
+          },
+          {
+            "name": "adresse",
+            "type": "text"
+          },
+          {
+            "name": "code_banque",
+            "type": "text"
+          },
+          {
+            "name": "num_pieceid",
+            "type": "text"
+          },
+          {
+            "name": "cheque_autoris",
+            "type": "text"
+          },
+          {
+            "name": "statut_social",
+            "type": "number"
+          },
+          {
+            "name": "boite_postal",
+            "type": "text"
+          },
+          {
+            "name": "coment1",
+            "type": "text"
+          },
+          {
+            "name": "coment2",
+            "type": "text"
+          },
+          {
+            "name": "id_utilis_maj",
+            "type": "number"
+          },
+          {
+            "name": "date_maj",
+            "type": "datetime"
+          },
+          {
+            "name": "id_utilis_crea",
+            "type": "number"
+          },
+          {
+            "name": "date_crea",
+            "type": "datetime"
+          },
+          {
+            "name": "qualite",
+            "type": "number"
+          },
+          {
+            "name": "type_piece",
+            "type": "number"
+          },
+          {
+            "name": "num_cellule",
+            "type": "number"
+          },
+          {
+            "name": "id_client_lien",
+            "type": "number"
+          },
+          {
+            "name": "anc_code_dest",
+            "type": "number"
+          },
+          {
+            "name": "nat_jur",
+            "type": "number"
+          },
+          {
+            "name": "num_tel",
+            "type": "text"
+          },
+          {
+            "name": "num_fax",
+            "type": "text"
+          },
+          {
+            "name": "nom_interloc",
+            "type": "text"
+          },
+          {
+            "name": "email",
+            "type": "text"
+          },
+          {
+            "name": "id_banque",
+            "type": "number"
+          },
+          {
+            "name": "nbre_ex_factures",
+            "type": "number"
+          },
+          {
+            "name": "secteur_postal",
+            "type": "text"
+          },
+          {
+            "name": "regroupe",
+            "type": "text"
+          },
+          {
+            "name": "num_portable",
+            "type": "number"
+          },
+          {
+            "name": "nni",
+            "type": "number"
+          },
+          {
+            "name": "date_naissance",
+            "type": "datetime"
+          },
+          {
+            "name": "nom_mere",
+            "type": "text"
+          },
+          {
+            "name": "date_service",
+            "type": "datetime"
+          },
+          {
+            "name": "date_resiliation",
+            "type": "datetime"
+          },
+          {
+            "name": "avance_consommation",
+            "type": "number"
+          },
+          {
+            "name": "consom_moyen",
+            "type": "number"
+          },
+          {
+            "name": "num_ordre_contrat",
+            "type": "number"
+          },
+          {
+            "name": "id_contrat",
+            "type": "number"
+          },
+          {
+            "name": "num_pl",
+            "type": "number"
+          },
+          {
+            "name": "date_pai_asc",
+            "type": "datetime"
+          },
+          {
+            "name": "ancien_num_contr",
+            "type": "text"
+          },
+          {
+            "name": "solde_compte",
+            "type": "number"
+          },
+          {
+            "name": "id_utilis_maj",
+            "type": "number"
+          },
+          {
+            "name": "date_maj",
+            "type": "datetime"
+          },
+          {
+            "name": "coment1",
+            "type": "text"
+          },
+          {
+            "name": "coment2",
+            "type": "text"
+          },
+          {
+            "name": "mode_envoi",
+            "type": "number"
+          },
+          {
+            "name": "mode_regl",
+            "type": "number"
+          },
+          {
+            "name": "position",
+            "type": "number"
+          },
+          {
+            "name": "ps",
+            "type": "number"
+          },
+          {
+            "name": "groupe_fac",
+            "type": "number"
+          },
+          {
+            "name": "sous_categ",
+            "type": "number"
+          },
+          {
+            "name": "montant_asc_paye",
+            "type": "number"
+          },
+          {
+            "name": "suivi_proc_contrat",
+            "type": "number"
+          },
+          {
+            "name": "ancien_code_dest",
+            "type": "number"
+          },
+          {
+            "name": "ancien_categ_tarif",
+            "type": "number"
+          },
+          {
+            "name": "statut_contrat",
+            "type": "number"
+          },
+          {
+            "name": "conso_cumul",
+            "type": "number"
+          },
+          {
+            "name": "date_souscription",
+            "type": "datetime"
+          },
+          {
+            "name": "date_dernier_avenant",
+            "type": "datetime"
+          },
+          {
+            "name": "descr_avenant",
+            "type": "text"
+          },
+          {
+            "name": "nb_releves_inutil",
+            "type": "number"
+          },
+          {
+            "name": "id_pl_reprise",
+            "type": "text"
+          },
+          {
+            "name": "date_derniere_releve",
+            "type": "datetime"
+          },
+          {
+            "name": "point_de_livraison",
+            "type": "number"
+          },
+          {
+            "name": "user_crea",
+            "type": "number"
+          },
+          {
+            "name": "date_contx",
+            "type": "datetime"
+          },
+          {
+            "name": "type_cellule",
+            "type": "number"
+          },
+          {
+            "name": "num_cellule",
+            "type": "number"
+          },
+          {
+            "name": "num_cpteur",
+            "type": "number"
+          }
+        ],
+        "type": "dbcustom_query"
+      },
+      {
+        "name": "releves",
+        "module": "dbupdater",
+        "action": "custom",
+        "options": {
+          "connection": "edbdev",
+          "sql": {
+            "query": "select * from view_releve_details4 v where v.id_contrat = ? order by v.num_releve DESC",
+            "params": [
+              {
+                "name": ":P1",
+                "value": "{{$_POST.id_contrat}}",
+                "test": "45716"
+              }
+            ]
+          }
+        },
+        "output": true,
+        "meta": [
+          {
+            "name": "num_releve",
+            "type": "number"
+          },
+          {
+            "name": "nom_periode",
+            "type": "text"
+          },
+          {
+            "name": "date_releve",
+            "type": "datetime"
+          },
+          {
+            "name": "num_cpteur",
+            "type": "text"
+          },
+          {
+            "name": "index_a",
+            "type": "number"
+          },
+          {
+            "name": "consommation",
+            "type": "number"
+          },
+          {
+            "name": "date_pf",
+            "type": "datetime"
+          },
+          {
+            "name": "libelle",
+            "type": "text"
+          },
+          {
+            "name": "id_contrat",
+            "type": "number"
+          },
+          {
+            "name": "typereleve",
+            "type": "text"
+          },
+          {
+            "name": "natrv",
+            "type": "text"
+          },
+          {
+            "name": "coment",
+            "type": "text"
+          },
+          {
+            "name": "num_facture",
+            "type": "number"
+          },
+          {
+            "name": "date_emission",
+            "type": "datetime"
+          },
+          {
+            "name": "montant",
+            "type": "number"
+          },
+          {
+            "name": "annule",
+            "type": "text"
+          },
+          {
+            "name": "lib_action",
+            "type": "text"
+          },
+          {
+            "name": "key_sort",
+            "type": "number"
+          },
+          {
+            "name": "rv_type",
+            "type": "number"
+          },
+          {
+            "name": "id_pl",
+            "type": "number"
+          }
+        ],
+        "type": "dbcustom_query",
+        "outputType": "array"
+      }
+    ]
+  }
+}

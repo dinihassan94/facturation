@@ -1,0 +1,12 @@
+.table-responsive{
+    font-size: smaller;
+    overflow-y: auto;
+
+}
+
+.clickable{
+    cursor: pointer;
+}
+.clickable:hover{
+    background-color: var(--secondary);
+}

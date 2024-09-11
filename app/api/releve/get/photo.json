@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "num_releve"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "query",
+      "module": "dbupdater",
+      "action": "custom",
+      "options": {
+        "connection": "testimage",
+        "sql": {
+          "query": "select * from tmp_releve_eddmobile where num_releve=?",
+          "params": [
+            {
+              "name": "?",
+              "value": "{{$_GET.num_releve}}",
+              "test": "6324556"
+            }
+          ]
+        }
+      },
+      "output": true,
+      "meta": [
+        {
+          "name": "num_releve",
+          "type": "number"
+        },
+        {
+          "name": "date_releve",
+          "type": "datetime"
+        },
+        {
+          "name": "nouveau_index",
+          "type": "number"
+        },
+        {
+          "name": "ancien_index",
+          "type": "number"
+        },
+        {
+          "name": "photo",
+          "type": "text"
+        },
+        {
+          "name": "latitude",
+          "type": "number"
+        },
+        {
+          "name": "longitude",
+          "type": "number"
+        },
+        {
+          "name": "system_source",
+          "type": "text"
+        },
+        {
+          "name": "date_envoi",
+          "type": "datetime"
+        },
+        {
+          "name": "statut",
+          "type": "number"
+        },
+        {
+          "name": "date_statut",
+          "type": "datetime"
+        },
+        {
+          "name": "user_maj",
+          "type": "number"
+        },
+        {
+          "name": "photo_url",
+          "type": "text"
+        },
+        {
+          "name": "commentaire",
+          "type": "text"
+        },
+        {
+          "name": "statut_releve",
+          "type": "number"
+        },
+        {
+          "name": "num_ligne",
+          "type": "number"
+        }
+      ],
+      "type": "dbcustom_query"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "query",
+      "module": "dbupdater",
+      "action": "custom",
+      "options": {
+        "connection": "TEST",
+        "sql": {
+          "query": "SELECT ID_TYPE_MVT, LIBELLE_TYPE_MVT, NATURE_PRESTATION, FACT_MANU, LIB_LONG \nFROM  VIEW_TYPE_MVT_PORTEF \nORDER BY LIBELLE_TYPE_MVT",
+          "params": []
+        }
+      },
+      "output": true,
+      "meta": [
+        {
+          "name": "id_type_mvt",
+          "type": "number"
+        },
+        {
+          "name": "libelle_type_mvt",
+          "type": "text"
+        },
+        {
+          "name": "nature_prestation",
+          "type": "number"
+        },
+        {
+          "name": "fact_manu",
+          "type": "text"
+        },
+        {
+          "name": "lib_long",
+          "type": "text"
+        }
+      ],
+      "type": "dbcustom_query"
+    }
+  }
+}

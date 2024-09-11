@@ -1,0 +1,54 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "idperiod"
+      },
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "getLotFac",
+      "module": "dbupdater",
+      "action": "custom",
+      "options": {
+        "connection": "edbdev",
+        "sql": {
+          "query": "select distinct l.num_lot_fac,l.libelle,l.num_gr_fac from lot_facturation l inner join suivi_lot_fac on l.num_lot_fac = suivi_lot_fac.num_lot_fac where suivi_lot_fac.id_periode = ?  order by l.num_lot_fac",
+          "params": [
+            {
+              "name": ":P1",
+              "value": "{{$_GET.idperiod}}",
+              "test": "491"
+            }
+          ]
+        }
+      },
+      "output": true,
+      "meta": [
+        {
+          "name": "num_lot_fac",
+          "type": "number"
+        },
+        {
+          "name": "libelle",
+          "type": "text"
+        },
+        {
+          "name": "num_gr_fac",
+          "type": "number"
+        }
+      ],
+      "type": "dbcustom_query"
+    }
+  }
+}

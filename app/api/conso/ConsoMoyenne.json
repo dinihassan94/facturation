@@ -1,0 +1,136 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "number",
+        "name": "idcontrat"
+      }
+    ],
+    "$_COOKIE": [
+      {
+        "type": "text",
+        "name": "token"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "api",
+      "module": "api",
+      "action": "send",
+      "options": {
+        "url": "{{'http://192.168.9.60:93/api/Contrats/conso/'+$_GET.idcontrat}}",
+        "schema": [
+          {
+            "type": "array",
+            "name": "data",
+            "sub": [
+              {
+                "type": "number",
+                "name": "year"
+              },
+              {
+                "type": "text",
+                "name": "consKwh"
+              },
+              {
+                "type": "text",
+                "name": "periode"
+              },
+              {
+                "type": "text",
+                "name": "max"
+              },
+              {
+                "type": "text",
+                "name": "min"
+              },
+              {
+                "type": "text",
+                "name": "moyenne"
+              }
+            ]
+          },
+          {
+            "type": "object",
+            "name": "headers",
+            "sub": [
+              {
+                "type": "text",
+                "name": "content-type"
+              },
+              {
+                "type": "text",
+                "name": "date"
+              },
+              {
+                "type": "text",
+                "name": "server"
+              },
+              {
+                "type": "text",
+                "name": "transfer-encoding"
+              }
+            ]
+          }
+        ]
+      },
+      "output": true,
+      "meta": [
+        {
+          "type": "array",
+          "name": "data",
+          "sub": [
+            {
+              "type": "number",
+              "name": "year"
+            },
+            {
+              "type": "text",
+              "name": "consKwh"
+            },
+            {
+              "type": "text",
+              "name": "periode"
+            },
+            {
+              "type": "text",
+              "name": "max"
+            },
+            {
+              "type": "text",
+              "name": "min"
+            },
+            {
+              "type": "text",
+              "name": "moyenne"
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "name": "headers",
+          "sub": [
+            {
+              "type": "text",
+              "name": "content-type"
+            },
+            {
+              "type": "text",
+              "name": "date"
+            },
+            {
+              "type": "text",
+              "name": "server"
+            },
+            {
+              "type": "text",
+              "name": "transfer-encoding"
+            }
+          ]
+        }
+      ],
+      "outputType": "object"
+    }
+  }
+}

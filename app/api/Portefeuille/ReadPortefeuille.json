@@ -1,0 +1,445 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "idcontrat"
+      },
+      {
+        "type": "date",
+        "name": "datedebut"
+      },
+      {
+        "type": "date",
+        "name": "datefin"
+      },
+      {
+        "type": "text",
+        "name": "checklettrage"
+      }
+    ],
+    "$_COOKIE": [
+      {
+        "type": "text",
+        "name": "token"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "",
+      "module": "core",
+      "action": "condition",
+      "options": {
+        "if": "{{$_GET.datedebut==null&&$_GET.datefin==null}}",
+        "then": {
+          "steps": {
+            "name": "api",
+            "module": "api",
+            "action": "send",
+            "options": {
+              "url": "{{'http://192.168.9.60:93/api/Factures/'+$_GET.idcontrat}}",
+              "schema": [
+                {
+                  "type": "array",
+                  "name": "data",
+                  "sub": [
+                    {
+                      "type": "number",
+                      "name": "contrat"
+                    },
+                    {
+                      "type": "number",
+                      "name": "type_MVT"
+                    },
+                    {
+                      "type": "number",
+                      "name": "trid"
+                    },
+                    {
+                      "type": "number",
+                      "name": "credit"
+                    },
+                    {
+                      "type": "number",
+                      "name": "ddebit"
+                    },
+                    {
+                      "type": "number",
+                      "name": "solde_Montant"
+                    },
+                    {
+                      "type": "text",
+                      "name": "libelle_Type_Mvt"
+                    },
+                    {
+                      "type": "text",
+                      "name": "date"
+                    },
+                    {
+                      "type": "text",
+                      "name": "date_Echeance"
+                    },
+                    {
+                      "type": "text",
+                      "name": "id_Lettrage"
+                    },
+                    {
+                      "type": "number",
+                      "name": "ps"
+                    },
+                    {
+                      "type": "text",
+                      "name": "tarif"
+                    },
+                    {
+                      "type": "text",
+                      "name": "senS_TYPE_MVT"
+                    },
+                    {
+                      "type": "text",
+                      "name": "image"
+                    },
+                    {
+                      "type": "text",
+                      "name": "tDate"
+                    }
+                  ]
+                },
+                {
+                  "type": "object",
+                  "name": "headers",
+                  "sub": [
+                    {
+                      "type": "text",
+                      "name": "content-type"
+                    },
+                    {
+                      "type": "text",
+                      "name": "date"
+                    },
+                    {
+                      "type": "text",
+                      "name": "server"
+                    },
+                    {
+                      "type": "text",
+                      "name": "transfer-encoding"
+                    }
+                  ]
+                }
+              ]
+            },
+            "output": true,
+            "meta": [
+              {
+                "type": "array",
+                "name": "data",
+                "sub": [
+                  {
+                    "type": "number",
+                    "name": "contrat"
+                  },
+                  {
+                    "type": "number",
+                    "name": "type_MVT"
+                  },
+                  {
+                    "type": "number",
+                    "name": "trid"
+                  },
+                  {
+                    "type": "number",
+                    "name": "credit"
+                  },
+                  {
+                    "type": "number",
+                    "name": "ddebit"
+                  },
+                  {
+                    "type": "number",
+                    "name": "solde_Montant"
+                  },
+                  {
+                    "type": "text",
+                    "name": "libelle_Type_Mvt"
+                  },
+                  {
+                    "type": "text",
+                    "name": "date"
+                  },
+                  {
+                    "type": "text",
+                    "name": "date_Echeance"
+                  },
+                  {
+                    "type": "text",
+                    "name": "id_Lettrage"
+                  },
+                  {
+                    "type": "number",
+                    "name": "ps"
+                  },
+                  {
+                    "type": "text",
+                    "name": "tarif"
+                  },
+                  {
+                    "type": "text",
+                    "name": "senS_TYPE_MVT"
+                  },
+                  {
+                    "type": "text",
+                    "name": "image"
+                  },
+                  {
+                    "type": "text",
+                    "name": "tDate"
+                  }
+                ]
+              },
+              {
+                "type": "object",
+                "name": "headers",
+                "sub": [
+                  {
+                    "type": "text",
+                    "name": "content-type"
+                  },
+                  {
+                    "type": "text",
+                    "name": "date"
+                  },
+                  {
+                    "type": "text",
+                    "name": "server"
+                  },
+                  {
+                    "type": "text",
+                    "name": "transfer-encoding"
+                  }
+                ]
+              }
+            ],
+            "outputType": "object"
+          }
+        },
+        "else": {
+          "steps": {
+            "name": "",
+            "module": "core",
+            "action": "condition",
+            "options": {
+              "if": "{{$_GET.idcontrat==null}}",
+              "then": {
+                "steps": {
+                  "name": "invalid",
+                  "module": "core",
+                  "action": "response",
+                  "options": {
+                    "status": 403,
+                    "data": "invalid contrat id"
+                  }
+                }
+              },
+              "else": {
+                "steps": {
+                  "name": "api",
+                  "module": "api",
+                  "action": "send",
+                  "options": {
+                    "url": "{{'http://192.168.9.60:93/api/Factures/'+$_GET.idcontrat+'/'+$_GET.datedebut+'/'+$_GET.datefin}}",
+                    "schema": [
+                      {
+                        "type": "array",
+                        "name": "data",
+                        "sub": [
+                          {
+                            "type": "number",
+                            "name": "contrat"
+                          },
+                          {
+                            "type": "number",
+                            "name": "type_MVT"
+                          },
+                          {
+                            "type": "number",
+                            "name": "trid"
+                          },
+                          {
+                            "type": "number",
+                            "name": "credit"
+                          },
+                          {
+                            "type": "number",
+                            "name": "ddebit"
+                          },
+                          {
+                            "type": "number",
+                            "name": "solde_Montant"
+                          },
+                          {
+                            "type": "text",
+                            "name": "libelle_Type_Mvt"
+                          },
+                          {
+                            "type": "text",
+                            "name": "date"
+                          },
+                          {
+                            "type": "text",
+                            "name": "date_Echeance"
+                          },
+                          {
+                            "type": "text",
+                            "name": "id_Lettrage"
+                          },
+                          {
+                            "type": "number",
+                            "name": "ps"
+                          },
+                          {
+                            "type": "text",
+                            "name": "tarif"
+                          },
+                          {
+                            "type": "text",
+                            "name": "senS_TYPE_MVT"
+                          },
+                          {
+                            "type": "text",
+                            "name": "image"
+                          },
+                          {
+                            "type": "text",
+                            "name": "tDate"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "name": "headers",
+                        "sub": [
+                          {
+                            "type": "text",
+                            "name": "content-type"
+                          },
+                          {
+                            "type": "text",
+                            "name": "date"
+                          },
+                          {
+                            "type": "text",
+                            "name": "server"
+                          },
+                          {
+                            "type": "text",
+                            "name": "transfer-encoding"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "output": true,
+                  "meta": [
+                    {
+                      "type": "array",
+                      "name": "data",
+                      "sub": [
+                        {
+                          "type": "number",
+                          "name": "contrat"
+                        },
+                        {
+                          "type": "number",
+                          "name": "type_MVT"
+                        },
+                        {
+                          "type": "number",
+                          "name": "trid"
+                        },
+                        {
+                          "type": "number",
+                          "name": "credit"
+                        },
+                        {
+                          "type": "number",
+                          "name": "ddebit"
+                        },
+                        {
+                          "type": "number",
+                          "name": "solde_Montant"
+                        },
+                        {
+                          "type": "text",
+                          "name": "libelle_Type_Mvt"
+                        },
+                        {
+                          "type": "text",
+                          "name": "date"
+                        },
+                        {
+                          "type": "text",
+                          "name": "date_Echeance"
+                        },
+                        {
+                          "type": "text",
+                          "name": "id_Lettrage"
+                        },
+                        {
+                          "type": "number",
+                          "name": "ps"
+                        },
+                        {
+                          "type": "text",
+                          "name": "tarif"
+                        },
+                        {
+                          "type": "text",
+                          "name": "senS_TYPE_MVT"
+                        },
+                        {
+                          "type": "text",
+                          "name": "image"
+                        },
+                        {
+                          "type": "text",
+                          "name": "tDate"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "name": "headers",
+                      "sub": [
+                        {
+                          "type": "text",
+                          "name": "content-type"
+                        },
+                        {
+                          "type": "text",
+                          "name": "date"
+                        },
+                        {
+                          "type": "text",
+                          "name": "server"
+                        },
+                        {
+                          "type": "text",
+                          "name": "transfer-encoding"
+                        }
+                      ]
+                    }
+                  ],
+                  "outputType": "object"
+                }
+              }
+            },
+            "outputType": "boolean"
+          }
+        }
+      },
+      "outputType": "boolean"
+    }
+  }
+}

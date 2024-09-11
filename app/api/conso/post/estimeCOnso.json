@@ -1,0 +1,81 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/index.ejs",
+      "linkedForm": "estimationForm"
+    },
+    "$_POST": [
+      {
+        "type": "text",
+        "fieldName": "index_a",
+        "name": "index_a"
+      },
+      {
+        "type": "text",
+        "fieldName": "id_contrat",
+        "name": "id_contrat"
+      },
+      {
+        "type": "text",
+        "fieldName": "date_releve",
+        "name": "date_releve"
+      },
+      {
+        "type": "text",
+        "fieldName": "index_r",
+        "name": "index_r"
+      },
+      {
+        "type": "text",
+        "fieldName": "ipm",
+        "name": "ipm"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "query",
+      "module": "dbupdater",
+      "action": "custom",
+      "options": {
+        "connection": "TEST",
+        "sql": {
+          "query": "select * from fc_estim_conso(:P1,:P2,:P3)",
+          "params": [
+            {
+              "name": ":P1",
+              "value": "{{$_POST.id_contrat}}",
+              "test": "314044"
+            },
+            {
+              "name": ":P2",
+              "value": "{{$_POST.index_a}}",
+              "test": "7000"
+            },
+            {
+              "name": ":P3",
+              "value": "{{$_POST.date_releve}}",
+              "test": "16/08/2024"
+            }
+          ]
+        }
+      },
+      "output": true,
+      "meta": [
+        {
+          "name": "conso",
+          "type": "number"
+        },
+        {
+          "name": "montant",
+          "type": "number"
+        },
+        {
+          "name": "message",
+          "type": "text"
+        }
+      ],
+      "type": "dbcustom_query"
+    }
+  }
+}
